@@ -1,0 +1,50 @@
+/**
+ * jQMultiTouch -- The jQuery of Multi-touch
+ * jQuery plug-in for multi-touch web interface development
+ * Version 1.0
+ *
+ * Copyright (C) 2010-2013 ETH Zurich. All rights reserved.
+ *
+ * This software is the proprietary information of ETH Zurich.
+ * Use is subject to license terms.
+ *
+ */
+.touchable:-moz-system-metric(touch-enabled) {
+	-moz-user-select: none;
+	cursor: crosshair;
+}
+.touchable::-moz-selection {
+	background: none;
+}
+.touched {
+}
+
+.draggable {
+}
+.dragging {
+	z-index: 9999;
+}
+
+.scalable {
+}
+.scaling {
+}
+
+.resizable {
+}
+.resizing {
+}
+
+.rotatable {
+}
+.rotating {
+}
+
+.orientable {
+}
+.portrait {
+}
+.landscape {
+}
+.landscape-90 {
+}

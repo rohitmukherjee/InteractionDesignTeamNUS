@@ -1,0 +1,15 @@
+#container {
+	background-color: silver;
+}
+
+#wrapper, #timer, #controls {
+	background-color: red;
+}
+
+#wrapper2, #slide, #blackscreen, #whitescreen, canvas {
+	background-color: green;
+}
+
+#wrapper3, #preview {
+	background-color: blue;
+}

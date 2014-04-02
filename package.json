@@ -1,0 +1,19 @@
+{
+  "name": "Presi",
+  "version": "0.14.0",
+  "author": "Michael Nebeling <nebeling@inf.ethz.ch> with help from Matthias Geel <geel@inf.ethz.ch>",
+  "description" : "Presi is a web application for synchronising slideshow presentations between different devices.",
+  
+  "scripts": {
+    "start": "node presi-node.js"
+  },
+  
+  "engines": {
+    "node": "0.8.x"
+  },
+  
+  "dependencies": {
+    "connect": ">=2.7.2",
+    "socket.io": ">=0.9.13"
+  }
+}

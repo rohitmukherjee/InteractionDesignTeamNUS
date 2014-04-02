@@ -1,0 +1,134 @@
+/* global */
+
+body {
+	background: white;
+	font-family: Verdana;
+	margin: 0;
+	padding: 0;
+	outline: 1px solid silver;
+}
+
+#container  {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden;
+}
+
+.spacer {
+	height: 1%;
+}
+
+/* #wrapper and inner children */
+
+#wrapper {
+	width: 100%;
+	height: 10%;
+	position: relative;
+}
+#wrapper.landscape {
+	width: 69%;
+	height: 14%;
+}
+
+#timer {
+	text-align: center;
+	width: 100%;
+	height: 50%;
+	vertical-align: center;
+	font-size: 1.2em;
+}
+	
+#controls {
+	display: table;
+	width: 100%;
+	height: 49%;
+	bottom: 1%;
+	position: absolute;
+	vertical-align: center;
+	font-size: 1.2em;
+}
+
+#controls div {
+	border: 1px solid black;
+	display: table-cell;
+	text-align: center;
+	width: 8%;
+}
+#controls div.touched {
+	background: #cfcfcf;
+}
+
+
+
+/* #wrapper2 and inner children */
+ 
+#wrapper2 {
+	width: 100%;
+	padding-bottom: 75%; /* keep aspect ratio */
+	position: relative;
+}
+#wrapper2.landscape {
+	width: 69%;
+	padding-bottom: 51.75%; /* keep aspect ratio */
+}
+
+#slide, #blackscreen, #whitescreen, canvas {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#slide {
+	border: 1px solid black;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#blackscreen {
+	border: 1px solid black;
+	background: black;
+	display: none;
+}
+
+#whitescreen {
+	border: 1px solid black;
+	background: white;
+	display: none;
+}
+
+canvas {
+	border: 1px solid red;
+	opacity: 0.8;
+	display: none;
+}
+
+
+
+/* #wrapper3 and inner children */
+
+#wrapper3 {
+	width: 100%;
+	height: 39%;
+	position: relative;
+}
+#wrapper3.landscape {
+	top: 0;
+	right: 0;
+	width: 29%;
+	height: 100%;
+	position: absolute;
+}
+
+#preview {
+	height: 100%;
+}
+#preview img {
+	border: 1px solid black;
+	width: 12%;
+}
+#preview.landscape img {
+	width: 25%;
+}
