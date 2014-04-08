@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+		<meta name="mobile-web-app-capable" content="yes"/>
+		<link rel="icon" type="image/png" href="presi_remote.png"/>
+		
+		<title> Team NUS Presentation Remote </title>
+		
+		<!-- include Node.js with Socket IO for web socket connectivity -->
+        <script type="text/javascript" src="socket.io/socket.io.js"></script>
+
+		<!-- include jQuery and jQuery UI for animations and easing effects -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
+		<!-- include jQMultiTouch -->
+        <script type="text/javascript" src="js/jquery.multitouch.js"></script>
+        <link href="css/jquery.multitouch.css" rel="stylesheet" type="text/css">
+
+		<!-- include Presi Remote slideshow presentation logic -->
+        <script type="text/javascript" src="js/presi-remote.js"></script>
+
+		<!-- Normalize.css to remove all kinds of browser padding / inconsistencies -->
+		<link href="css/normalize.css" rel="stylesheet" type="text/css">
+
+		<!-- Fixed layout specifically designed for Nexus 7 fullscreen mode -->
+		<link href="css/presi-remote.fixed.css" rel="stylesheet" type="text/css">
+
+		<!-- Additional styles for testing and development -->
+		<link href="css/presi-remote.debug.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		
+		<!-- This div contains the buttons  - Annotations, Settings and Grid - View. Visibility of this depends on user touch-->
+		<div id = "button_panel">
+		</div>
+		
+		<!-- This div contains the timer/slide status -->
+		<div id = "top_panel">
+	 		<div id = "timer"></div>
+	 		<div id = "slide_status"></div>
+	 	</div>
+		
+		<!-- This div contains the slides -->
+		<div id = "slide_container"></div>
+		
+		<!-- This div contains the notes -->
+		<div id = "notes_container"></div>
+
+		<!-- This div contains the preview -->
+		<div id = "preview"></div>
+	</body>
+</html>
