@@ -93,13 +93,21 @@ body {
 
 #notes_container {
 	display: block;
-	height: 29%;
+	height: 35%;
 	background-color: grey;
 	margin: 2px;
 }
 
-#preview_slides {
+#preview {
 	display: block;
-	height: 9.5%;
+	height: 15%;
 	background-color: green;
+	margin: 2px;
+	overflow: scroll;
+}
+
+#preview img {
+	border: 1px solid black;
+	width: 65px;
+	margin: 1px;
 }

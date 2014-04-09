@@ -25,16 +25,12 @@
 		<link href="css/normalize.css" rel="stylesheet" type="text/css">
 		<link href="css/vertical_presentation.css" rel="stylesheet" type="text/css">
 
-		 <!-- Fixed layout specifically designed for Nexus 7 fullscreen mode -->
-		<!-- <link href="css/presi-remote.fixed.css" rel="stylesheet" type="text/css"> -->
-
-		<!-- Additional styles for testing and development -->
-		<!-- <link href="css/presi-remote.debug.css" rel="stylesheet" type="text/css"> --> 
 	</head>
 	<body>
 		<div id = "container">
 		<!-- This div contains the buttons  - Annotations, Settings and Grid - View. Visibility of this depends on user touch-->
 		<div id = "button_panel">
+			<button data-text-swap="Pause" data-text-original = "Play" id = "play_pause">Play</button>
 			<button id = "grid_button">Grid View</button>
 	 		<button id = "annotation_button">Annotation</button>
 	 		<button id = "settings_button">Settings</button>
@@ -54,7 +50,7 @@
 		</div>
 
 		<!-- This div contains the preview -->
-		<div id = "preview_slides"></div>
+		<div id = "preview"></div>
 
 		<!-- Grid - View div, visible only on button click -->
 	</div>

@@ -1,5 +1,9 @@
 $(function() {
 
+/** Declare state variables and constants here*/
+
+var slideCount = 26;
+var timer = 0;
 /*---------*/
 /* startup */
 /*---------*/
@@ -8,7 +12,7 @@ $(function() {
 	// Hide the button panel on application start - up
 	$('#button_panel').hide();
 
-	$(document).touch(function() {
+	$('#slide_container').touch(function() {
 		$('#button_panel').toggle('fade');
 	});
 	
@@ -24,6 +28,30 @@ $(function() {
 	// connect to Presi
 	var socket = io.connect('http://' + window.location.host),
 	channel = location.hash || prompt('Channel:');
+
+
+/*---------*/
+/* preview */
+/*---------*/
+
+	// TODO: This can be optimized to not add slides on touch but on ready (only once)
+	for (var i = 1; i <= slideCount; i++) {
+		var slideTouchEvent = function() {
+			if (mode != 'slideshow') return;
+			var $this = $(this);
+			slide = $this.index() + 1;
+			updateSlide($this.attr('src'));
+		};
+		$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).touch(slideTouchEvent).appendTo('#preview');
+	}
+
+	// This bit is only to toggle the play and pause buttons
+	$('#play_pause').on("click", function() {
+  	var el = $(this);
+  	el.text() == el.data("text-swap") 
+    ? el.text(el.data("text-original")) 
+    : el.text(el.data("text-swap"));
+});
 
 /*---------*/
 /* Helper Functions */
