@@ -19,8 +19,18 @@ body {
 	position: absolute;
 }
 
+
+/* css for gird view*/
 .grid-image {
 	border: 1px solid black;
-	width: 150px;
-	margin: 1px;
+	width: 180px;
+	margin: 9px;
+}
+#grid-view-navigate {
+	height: 50px;
+	background-color: green;
+}
+
+#grid-back {
+	float: right;
 }
