@@ -22,13 +22,30 @@ body {
 	height: 1%;
 }
 
+/* hideable button panel */
+
+#button_panel{
+	background-color:rgba(255,0,0,0.5);
+	display: none;
+	position:absolute;
+	height: 86px;
+	width: 600px;
+	position: fixed;
+	top:0;
+	left: 0;
+	text-align: center;
+	z-index: 10000;
+}
+
 /* top_panel style */
 
 #top_panel {
 	display: block;
+	position: absolute;
 	background-color: yellow;
 	text-align: center;
 	height: 10%;
+	width: 100%;
 }
 
 #timer {
@@ -60,8 +77,10 @@ body {
 /* center_container styles go here */
 
 #center_container {
+	/*position: absolute;*/
 	display: block;
-	height: 55%;
+	height: 58%;
+	width: 100%;
 	background-color: orange;
 }
 
@@ -81,6 +100,6 @@ body {
 
 #preview_slides {
 	display: block;
-	height: 7.5%;
+	height: 9.5%;
 	background-color: green;
 }
