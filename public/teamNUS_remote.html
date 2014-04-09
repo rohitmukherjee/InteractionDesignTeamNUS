@@ -23,32 +23,39 @@
 
 		<!-- Normalize.css to remove all kinds of browser padding / inconsistencies -->
 		<link href="css/normalize.css" rel="stylesheet" type="text/css">
+		<link href="css/vertical_presentation.css" rel="stylesheet" type="text/css">
 
-		<!-- Fixed layout specifically designed for Nexus 7 fullscreen mode -->
-		<link href="css/presi-remote.fixed.css" rel="stylesheet" type="text/css">
+		 <!-- Fixed layout specifically designed for Nexus 7 fullscreen mode -->
+		<!-- <link href="css/presi-remote.fixed.css" rel="stylesheet" type="text/css"> -->
 
 		<!-- Additional styles for testing and development -->
-		<link href="css/presi-remote.debug.css" rel="stylesheet" type="text/css">
+		<!-- <link href="css/presi-remote.debug.css" rel="stylesheet" type="text/css"> --> 
 	</head>
 	<body>
-		
+		<div id = "container">
 		<!-- This div contains the buttons  - Annotations, Settings and Grid - View. Visibility of this depends on user touch-->
-		<div id = "button_panel">
-		</div>
+		<div id = "button_panel"></div>
 		
 		<!-- This div contains the timer/slide status -->
 		<div id = "top_panel">
-	 		<div id = "timer"></div>
-	 		<div id = "slide_status"></div>
+	 		<div id = "timer"> 0:00 </div>
+	 		<div id = "slide_status"> 0/0 </div>
+	 		<button id = "grid_button">Grid View</button>
+	 		<button id = "annotation_button">Annotation </button>
 	 	</div>
 		
-		<!-- This div contains the slides -->
-		<div id = "slide_container"></div>
+		<div id = "center_container">
+			<!-- This div contains the slides -->
+			<div id = "slide_container"></div>
 		
-		<!-- This div contains the notes -->
-		<div id = "notes_container"></div>
+			<!-- This div contains the notes -->
+			<div id = "notes_container"></div>
+		</div>
 
 		<!-- This div contains the preview -->
-		<div id = "preview"></div>
+		<div id = "preview_slides"></div>
+
+		<!-- Grid - View div, visible only on button click -->
+	</div>
 	</body>
 </html>
