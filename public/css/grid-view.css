@@ -1,0 +1,26 @@
+/* global */
+body {
+	font-family: Verdana;
+	margin: 0px;
+	padding: 0px;
+	font-size: 24px;
+}
+
+.spacer {
+	display: none;
+}
+
+/* portrait: 601x881; landscape: 962x529 */
+#container  {
+	left: 0px;
+	top: 0px;
+	width: 600px;
+	height: 880px;
+	position: absolute;
+}
+
+.grid-image {
+	border: 1px solid black;
+	width: 150px;
+	margin: 1px;
+}
