@@ -26,7 +26,7 @@ body {
 
 #button_panel{
 	background-color:rgba(255,0,0,0.5);
-	display: none;
+	display: block;
 	position:absolute;
 	height: 86px;
 	width: 600px;
