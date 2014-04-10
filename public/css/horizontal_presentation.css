@@ -1,0 +1,116 @@
+/* Horizontal Orientation - presi remote *
+ portrait: 601x881; landscape: 962x529 */
+
+body {
+	background: white;
+	font-family: Verdana;
+	margin: 0;
+	padding: 0;
+	outline: 1px solid silver;
+}
+
+#container  {
+	left: 0;
+	top: 0;
+	width: 962px;
+	height: 529px;
+	position: absolute;
+	overflow: hidden;
+}
+
+.spacer {
+	height: 1%;
+}
+
+/* hideable button panel */
+
+#button_panel{
+	background-color:rgba(255,0,0,0.5);
+	display: block;
+	position:absolute;
+	height: 86px;
+	width: 600px;
+	position: fixed;
+	top:0;
+	left: 0;
+	text-align: center;
+	z-index: 10000;
+}
+
+/* top_panel style */
+
+#top_panel {
+	display: block;
+	background-color: yellow;
+	text-align: center;
+	height: 10%;
+	width: 100%;
+}
+
+#timer {
+	display: inline-block;
+	text-align: center;
+	background-color: red;
+	vertical-align: center;
+	font-size: 1.2em;
+	padding: 5%;
+}
+
+#slide_status {
+	display: inline-block;
+	text-align: center;
+	background-color: grey;
+	vertical-align: center;
+	font-size: 1.2em;
+	padding: 5%;
+}
+
+#grid_button {
+	
+}
+
+#annotation_button {
+
+}
+
+/* center_container styles go here */
+
+#center_container {
+	display: block;
+	height: 50%;
+	width: 100%;
+	background-color: orange;
+}
+
+#slide_container {
+	display: block;
+	height: 98%;
+	background-color: blue;
+	margin: 2px;
+	padding: 2px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	overflow: hidden;
+}
+
+#notes_container {
+	display: none;
+	height: 35%;
+	background-color: grey;
+	margin: 2px;
+}
+	
+#preview {
+	display: block;
+	height: 15%;
+	background-color: green;
+	margin: 2px;
+	overflow: scroll;
+}
+
+#preview img {
+	border: 1px solid black;
+	width: 65px;
+	margin: 1px;
+}
