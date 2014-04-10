@@ -41,7 +41,6 @@ body {
 
 #top_panel {
 	display: block;
-	position: absolute;
 	background-color: yellow;
 	text-align: center;
 	height: 10%;
@@ -77,27 +76,31 @@ body {
 /* center_container styles go here */
 
 #center_container {
-	/*position: absolute;*/
 	display: block;
-	height: 58%;
+	height: 50%;
 	width: 100%;
 	background-color: orange;
 }
 
 #slide_container {
 	display: block;
-	height: 70%;
+	height: 98%;
 	background-color: blue;
 	margin: 2px;
+	padding: 2px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	overflow: hidden;
 }
 
 #notes_container {
-	display: block;
+	display: none;
 	height: 35%;
 	background-color: grey;
 	margin: 2px;
 }
-
+	
 #preview {
 	display: block;
 	height: 15%;
