@@ -1,4 +1,4 @@
-
+	
 $(function() {
 
 /** Declare state variables and constants here*/
@@ -8,21 +8,33 @@ var timer = 0;
 var slideshow = false;
 var currentSlide = 1;
 var _handle = false;
-
+// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
+var loadedIntoGridView = false; 
 
 // Plays/Pauses slide show and timer on click. Used for starting the show as well
 $('#play_pause').touch(function() {
-		slideshow = true;
-		updateSlide('slides/Slide' + currentSlide + '.PNG'); // show current slide
-		if (!_handle) {
-			// The timer is updated every 1 ms
-			_handle = setInterval(function() {
-				timer++;
-				$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
-			}, 1000);
+		if (!slideshow) {
+			slideshow = true;
+			updateSlide('slides/Slide' + currentSlide + '.PNG');
 		}
+		if (!_handle)
+			startTimer();
+		else
+			stopTimer();
 	});
 
+/* Handlers for showing and hiding the grid view */
+
+$('#grid_button').click(function() {
+		showGridView();
+});
+
+$('#grid-back').click(function() {
+		hideGridView();
+});
+
+
+/* Handlers for handling slide show logic */
 
 $('#slide_container').dblclick(function () {
 	console.log("Double click triggered on slide_container");
@@ -71,9 +83,6 @@ $('#slide_container').click(function () {
 	var socket = io.connect('http://' + window.location.host),
 	channel = location.hash || prompt('Channel:');
 
-
-
-
 /*---------*/
 /* preview */
 /*---------*/
@@ -89,6 +98,7 @@ $('#slide_container').click(function () {
 		$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).touch(slideTouchEvent).appendTo('#preview');
 	}*/
 
+
 	// This bit is only to toggle the play and pause buttons
 	$('#play_pause').on("click", function() {
   	var el = $(this);
@@ -103,6 +113,18 @@ $('#slide_container').click(function () {
 
 function updateSlideStatus(currentSlide) {
 	$('#slide_status').text(currentSlide + ' / ' + slideCount);
+}
+
+function stopTimer() {
+	clearInterval(_handle);
+	_handle = false;
+}
+
+function startTimer() {
+	_handle = setInterval(function() {
+				timer++;
+				$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
+			}, 1000);
 }
 
 function nextSlide() {
@@ -129,4 +151,36 @@ function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectO
 			socket.emit('issueCommand', { channel: channel, command: 'slide', url: url });
 		}
 	}
+
+/* Grid view specific code here */
+function showGridView() {
+	$('#grid-view-container').css({"display" : "block"});
+	$('#grid-view-navigate').css({"display" : "block"});
+	$('#grid-image-container').css({"display" : "block"});
+	loadSlidesIntoGridView();
+}
+
+function hideGridView() {
+	$('#grid-view-container').css({"display" : "none"});
+	$('#grid-view-navigate').css({"display" : "none"});
+	$('#grid-image-container').css({"display" : "none"});
+}
+
+function loadSlidesIntoGridView() {
+	if (!loadedIntoGridView) {
+		for (var i = 1; i <= slideCount; i++) {
+			$('<img></img>', { src: 'slides/Slide' + i + '.PNG' , class: 'grid-image'}).touch(gridTouchSlide).appendTo('#grid-image-container');
+		}
+	loadedIntoGridView = true;
+	}
+}
+
+function gridTouchSlide() {
+		var slideClickedOn = $(this).index() + 1;
+		console.log("You clicked on slideNumber " + slideClickedOn);
+		currentSlide = slideClickedOn;
+		updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+		hideGridView();
+}
+
 })

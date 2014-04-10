@@ -114,3 +114,31 @@ body {
 	width: 65px;
 	margin: 1px;
 }
+
+/* Styles for the hideable grid - view go here */
+#grid-view-container {
+	display: none;
+	width: 600px;
+	height: 800px;
+	background-color: red;
+	position: fixed;
+	z-index: 10000;
+	overflow: scroll;
+}
+
+#grid-image-container {
+	display: block;
+}
+
+.grid-image {
+	border: 1px solid black;
+	width: 120px;
+	margin: 2px;
+}
+
+#grid-view-navigate {
+	display:none;
+	height: 5%;
+	width: 100%;
+	background-color: green;
+}
