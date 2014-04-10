@@ -101,6 +101,10 @@ $('#slide_container').click(function () {
 /* Helper Functions */
 /*---------*/
 
+function updateSlideStatus(currentSlide) {
+	$('#slide_status').text(currentSlide + ' / ' + slideCount);
+}
+
 function nextSlide() {
 	if (currentSlide == slideCount) return;
 	currentSlide ++;
@@ -114,6 +118,7 @@ function previousSlide() {
 }
 
 function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
+		updateSlideStatus(currentSlide);
 		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
 		if (typeof showEffect === 'undefined') showEffect = 'fade';
 		$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
