@@ -1,36 +1,36 @@
 	
 $(function() {
 
-/** Declare state variables and constants here*/
+	/** Declare state variables and constants here*/
 
-var slideCount = 26;
-var timer = 0;
-var slideshow = false;
-var currentSlide = 1;
-var _handle = false;
+	var slideCount = 26;
+	var timer = 0;
+	var slideshow = false;
+	var currentSlide = 1;
+	var _handle = false;
 // This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
-var loadedIntoGridView = false; 
+var loadedIntoGridView = false;
 
 // Plays/Pauses slide show and timer on click. Used for starting the show as well
 $('#play_pause').touch(function() {
-		if (!slideshow) {
-			slideshow = true;
-			updateSlide('slides/Slide' + currentSlide + '.PNG');
-		}
-		if (!_handle)
-			startTimer();
-		else
-			stopTimer();
-	});
+	if (!slideshow) {
+		slideshow = true;
+		updateSlide('slides/Slide' + currentSlide + '.PNG');
+	}
+	if (!_handle)
+		startTimer();
+	else
+		stopTimer();
+});
 
 /* Handlers for showing and hiding the grid view */
 
 $('#grid_button').click(function() {
-		showGridView();
+	showGridView();
 });
 
 $('#grid-back').click(function() {
-		hideGridView();
+	hideGridView();
 });
 
 
@@ -48,7 +48,7 @@ $('#slide_container').click(function () {
 
 
 // predefined swipe left for next/swipe right for prev
-	$('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
+$('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
 		if (!$('#slide_container').is(':animated')) { // wait for animation to end
 			previousSlide();
 		}
@@ -58,9 +58,9 @@ $('#slide_container').click(function () {
 		}
 	});
 
-/*---------*/
-/* startup */
-/*---------*/
+	/*---------*/
+	/* startup */
+	/*---------*/
 
 	// configure jQMultiTouch
 	// Hide the button panel on application start - up
@@ -83,9 +83,9 @@ $('#slide_container').click(function () {
 	var socket = io.connect('http://' + window.location.host),
 	channel = location.hash || prompt('Channel:');
 
-/*---------*/
-/* preview */
-/*---------*/
+	/*---------*/
+	/* preview */
+	/*---------*/
 
 	/*// TODO: This can be optimized to not add slides on touch but on ready (only once)
 	for (var i = 1; i <= slideCount; i++) {
@@ -101,45 +101,45 @@ $('#slide_container').click(function () {
 
 	// This bit is only to toggle the play and pause buttons
 	$('#play_pause').on("click", function() {
-  	var el = $(this);
-  	el.text() == el.data("text-swap") 
-    ? el.text(el.data("text-original")) 
-    : el.text(el.data("text-swap"));
-});
+		var el = $(this);
+		el.text() == el.data("text-swap") 
+		? el.text(el.data("text-original")) 
+		: el.text(el.data("text-swap"));
+	});
 
-/*---------*/
-/* Helper Functions */
-/*---------*/
+	/*---------*/
+	/* Helper Functions */
+	/*---------*/
 
-function updateSlideStatus(currentSlide) {
-	$('#slide_status').text(currentSlide + ' / ' + slideCount);
-}
+	function updateSlideStatus(currentSlide) {
+		$('#slide_status').text(currentSlide + ' / ' + slideCount);
+	}
 
-function stopTimer() {
-	clearInterval(_handle);
-	_handle = false;
-}
+	function stopTimer() {
+		clearInterval(_handle);
+		_handle = false;
+	}
 
-function startTimer() {
-	_handle = setInterval(function() {
-				timer++;
-				$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
-			}, 1000);
-}
+	function startTimer() {
+		_handle = setInterval(function() {
+			timer++;
+			$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
+		}, 1000);
+	}
 
-function nextSlide() {
-	if (currentSlide == slideCount) return;
-	currentSlide ++;
-	updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-}
+	function nextSlide() {
+		if (currentSlide == slideCount) return;
+		currentSlide ++;
+		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+	}
 
-function previousSlide() {
-	if (currentSlide == 1) return;
-	currentSlide --;
-	updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-}
+	function previousSlide() {
+		if (currentSlide == 1) return;
+		currentSlide --;
+		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+	}
 
-function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
+	function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
 		updateSlideStatus(currentSlide);
 		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
 		if (typeof showEffect === 'undefined') showEffect = 'fade';
@@ -152,35 +152,35 @@ function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectO
 		}
 	}
 
-/* Grid view specific code here */
-function showGridView() {
-	$('#grid-view-container').css({"display" : "block"});
-	$('#grid-view-navigate').css({"display" : "block"});
-	$('#grid-image-container').css({"display" : "block"});
-	loadSlidesIntoGridView();
-}
-
-function hideGridView() {
-	$('#grid-view-container').css({"display" : "none"});
-	$('#grid-view-navigate').css({"display" : "none"});
-	$('#grid-image-container').css({"display" : "none"});
-}
-
-function loadSlidesIntoGridView() {
-	if (!loadedIntoGridView) {
-		for (var i = 1; i <= slideCount; i++) {
-			$('<img></img>', { src: 'slides/Slide' + i + '.PNG' , class: 'grid-image'}).touch(gridTouchSlide).appendTo('#grid-image-container');
-		}
-	loadedIntoGridView = true;
+	/* Grid view specific code here */
+	function showGridView() {
+		$('#grid-view-container').css({"display" : "block"});
+		$('#grid-view-navigate').css({"display" : "block"});
+		$('#grid-image-container').css({"display" : "block"});
+		loadSlidesIntoGridView();
 	}
-}
 
-function gridTouchSlide() {
+	function hideGridView() {
+		$('#grid-view-container').css({"display" : "none"});
+		$('#grid-view-navigate').css({"display" : "none"});
+		$('#grid-image-container').css({"display" : "none"});
+	}
+
+	function loadSlidesIntoGridView() {
+		if (!loadedIntoGridView) {
+			for (var i = 1; i <= slideCount; i++) {
+				$('<img></img>', { src: 'slides/Slide' + i + '.PNG' , class: 'grid-image'}).touch(gridTouchSlide).appendTo('#grid-image-container');
+			}
+			loadedIntoGridView = true;
+		}
+	}
+
+	function gridTouchSlide() {
 		var slideClickedOn = $(this).index() + 1;
 		console.log("You clicked on slideNumber " + slideClickedOn);
 		currentSlide = slideClickedOn;
 		updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
 		hideGridView();
-}
+	}
 
 })

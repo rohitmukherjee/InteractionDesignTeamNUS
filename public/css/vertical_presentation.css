@@ -1,5 +1,5 @@
 /* Vertical Orientation - presi remote *
- portrait: 601x881; landscape: 962x529 */
+portrait: 601x881; landscape: 962x529 */
 
 body {
 	background: white;
@@ -100,7 +100,7 @@ body {
 	background-color: grey;
 	margin: 2px;
 }
-	
+
 #preview {
 	display: block;
 	height: 15%;
