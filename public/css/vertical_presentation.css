@@ -103,13 +103,31 @@ body {
 
 #preview {
 	display: block;
-	height: 15%;
 	background-color: green;
 	margin: 2px;
 	overflow: scroll;
 }
 
-#preview img {
+#list-container {
+	height: 8%;
+	width: 500px;
+	position: relative;
+}
+
+#preview ul {
+	list-style-type: none;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+}
+
+#preview li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+#preview ul img {	
 	border: 1px solid black;
 	width: 65px;
 	margin: 1px;

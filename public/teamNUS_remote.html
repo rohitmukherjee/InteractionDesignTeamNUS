@@ -4,9 +4,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 	<meta name="mobile-web-app-capable" content="yes"/>
 	<link rel="icon" type="image/png" href="presi_remote.png"/>
-	
+
 	<title> Team NUS Presentation Remote </title>
-	
+
 	<!-- include Node.js with Socket IO for web socket connectivity -->
 	<script type="text/javascript" src="socket.io/socket.io.js"></script>
 
@@ -44,15 +44,19 @@
 		<div id = "center_container">
 			<!-- This div contains the slides -->
 			<div id = "slide_container"></div>
-			
+
 			<!-- This div contains the notes -->
 			<div id = "notes_container"></div>
 		</div>
 
 		<!-- This div contains the preview -->
-		<div id = "preview"></div>
+		<div id = "preview">
+			<div id = "list-container">
+			<ul id = "list"></ul>
+			</div>
+		</div>
 	</div>	
-	
+
 	<!-- Grid - View div, visible only on button click -->
 	<div id="grid-view-container">
 		<div id="grid-view-navigate">

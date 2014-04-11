@@ -70,6 +70,8 @@ $('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'med
 		$('#button_panel').toggle('fade');
 	});*/
 	
+	$(document).ready(loadSlidePreview);
+
 	$.touch.preventDefault = true; // disable default behaviour
 
 	$.touch.triggerMouseEvents = true; // enable mouse events
@@ -98,7 +100,6 @@ $('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'med
 		$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).touch(slideTouchEvent).appendTo('#preview');
 	}*/
 
-
 	// This bit is only to toggle the play and pause buttons
 	$('#play_pause').on("click", function() {
 		var el = $(this);
@@ -111,42 +112,59 @@ $('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'med
 	/* Helper Functions */
 	/*---------*/
 
-	function updateSlideStatus(currentSlide) {
-		$('#slide_status').text(currentSlide + ' / ' + slideCount);
+	function loadSlidePreview() {
+		for (var i = 1; i <= slideCount; i++) {
+			var slideTouchEvent = function() {
+				if (mode != 'slideshow') return;
+				var $this = $(this);
+				slide = $this.index() + 1;
+				updateSlide($this.attr('src'));
+			};
+		// set the width of list - container
+		$('#list-container').css({'width' : slideCount * 65 + 'px'});
+		$('#list').append('<li id=' + i + ' >');
+		$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
+		$("#list #" + i).append('</li>');
+		console.log($('#preview').html());
 	}
+}
 
-	function stopTimer() {
-		clearInterval(_handle);
-		_handle = false;
-	}
+function updateSlideStatus(currentSlide) {
+	$('#slide_status').text(currentSlide + ' / ' + slideCount);
+}
 
-	function startTimer() {
-		_handle = setInterval(function() {
-			timer++;
-			$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
-		}, 1000);
-	}
+function stopTimer() {
+	clearInterval(_handle);
+	_handle = false;
+}
 
-	function nextSlide() {
-		if (currentSlide == slideCount) return;
-		currentSlide ++;
-		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-	}
+function startTimer() {
+	_handle = setInterval(function() {
+		timer++;
+		$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
+	}, 1000);
+}
 
-	function previousSlide() {
-		if (currentSlide == 1) return;
-		currentSlide --;
-		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-	}
+function nextSlide() {
+	if (currentSlide == slideCount) return;
+	currentSlide ++;
+	updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+}
 
-	function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
-		updateSlideStatus(currentSlide);
-		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
-		if (typeof showEffect === 'undefined') showEffect = 'fade';
-		$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
-			$('#slide_container').css('background-image', 'url(' + url + ')');
-			$('#slide_container').show(showEffect, showEffectOptions);
-		});
+function previousSlide() {
+	if (currentSlide == 1) return;
+	currentSlide --;
+	updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+}
+
+function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
+	updateSlideStatus(currentSlide);
+	if (typeof hideEffect === 'undefined') hideEffect = 'fade';
+	if (typeof showEffect === 'undefined') showEffect = 'fade';
+	$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
+		$('#slide_container').css('background-image', 'url(' + url + ')');
+		$('#slide_container').show(showEffect, showEffectOptions);
+	});
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'slide', url: url });
 		}
