@@ -14,46 +14,48 @@ body {
 	top: 0;
 	width: 962px;
 	height: 529px;
-	position: absolute;
-	overflow: hidden;
 }
 
-.spacer {
-	height: 1%;
-}
 
-/* hideable button panel */
+
+/*button panel */
 
 #button_panel{
+	display: inline-block;
 	background-color:rgba(255,0,0,0.5);
-	display: block;
-	position:absolute;
-	height: 86px;
-	width: 600px;
-	position: fixed;
-	top:0;
-	left: 0;
+	
+	height: 100%;
+	width: 18%;
+
 	text-align: center;
-	z-index: 10000;
 }
 
-/* top_panel style */
-
-#top_panel {
+#preview {
 	display: block;
+	height: 90%;
+	width: 100%;
+	background-color: green;
+	margin: 2px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+/* left_panel style */
+
+#left_panel {
+	display: inline-block;
 	background-color: yellow;
 	text-align: center;
-	height: 10%;
-	width: 100%;
+	height: 100%;
+	width: 20%;
 }
 
 #timer {
-	display: inline-block;
+	display: block;
 	text-align: center;
 	background-color: red;
 	vertical-align: center;
 	font-size: 1.2em;
-	padding: 5%;
+	height: 10%;
 }
 
 #slide_status {
@@ -63,51 +65,60 @@ body {
 	vertical-align: center;
 	font-size: 1.2em;
 	padding: 5%;
-}
-
-#grid_button {
-	
-}
-
-#annotation_button {
-
+	float: right;
 }
 
 /* center_container styles go here */
 
 #center_container {
-	display: block;
-	height: 50%;
-	width: 100%;
+	display: inline-block;
+	height: 100%;
+	width: 60%;
 	background-color: orange;
 }
 
 #slide_container {
 	display: block;
-	height: 98%;
+	height: 70%;
+	width: 100%;
 	background-color: blue;
-	margin: 2px;
-	padding: 2px;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
-	overflow: hidden;
 }
 
 #notes_container {
 	display: none;
-	height: 35%;
+	height: 30%;
+	width: 100%;
 	background-color: grey;
-	margin: 2px;
 }
+
+#grid_button {
+	position: absolute;
+	left: 800px;
+	top: 50px;
+}
+#play_pause {
+	position: absolute;
+	left: 800px;
+	top: 150px;
+}
+#settings_button {
+	position: absolute;
+	left: 800px;
+	top: 250px;
+}
+
+#annotation_button {
+	position: absolute;
+	left: 800px;
+	top: 350px;
+}
+
+
 	
-#preview {
-	display: block;
-	height: 15%;
-	background-color: green;
-	margin: 2px;
-	overflow: scroll;
-}
+
 
 #preview img {
 	border: 1px solid black;
