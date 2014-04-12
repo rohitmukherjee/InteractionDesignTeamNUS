@@ -34,6 +34,7 @@ $(function() {
 	});
 
 	/* Touch Gestures go here */
+
 	$('#grid_button').touch(showGridView);
 	$('#grid-back').touch(hideGridView);	
 
@@ -53,7 +54,7 @@ $(function() {
 
 	// predefined swipe left for next/swipe right for prev
 	$('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
-			if (!$('#slide_container').is(':animated')) { // wait for animation to end
+			// if (!$('#slide_container').is(':animated')) { // wait for animation to end
 				previousSlide();
 			}
 		}).swipe({ direction: 'left', distance: 'short', speed: 'medium' }, function() {
@@ -95,6 +96,13 @@ $(function() {
 
 		// This bit is only to toggle the play and pause buttons
 		$('#play_pause').on("click", function() {
+			var el = $(this);
+			el.text() == el.data("text-swap") 
+			? el.text(el.data("text-original")) 
+			: el.text(el.data("text-swap"));
+		});
+
+		$('#play_pause').on("touch", function() {
 			var el = $(this);
 			el.text() == el.data("text-swap") 
 			? el.text(el.data("text-original")) 
