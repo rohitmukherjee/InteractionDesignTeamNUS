@@ -56,11 +56,10 @@ $(function() {
 	$('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
 			// if (!$('#slide_container').is(':animated')) { // wait for animation to end
 				previousSlide();
-			}
 		}).swipe({ direction: 'left', distance: 'short', speed: 'medium' }, function() {
-			if (!$('#slide_container').is(':animated')) { // wait for animation to end
+			if (!$('#slide_container').is(':animated'))// wait for animation to end
 				nextSlide();
-			}
+	
 		});
 
 		/*---------*/
