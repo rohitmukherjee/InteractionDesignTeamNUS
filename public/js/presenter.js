@@ -1,4 +1,4 @@
-	
+
 $(function() {
 
 	/** Declare state variables and constants here*/
@@ -113,21 +113,24 @@ $(function() {
 		/*---------*/
 
 		function loadSlidePreview() {
-			for (var i = 1; i <= slideCount; i++) {
-				var slideTouchEvent = function() {
-					if (mode != 'slideshow') return;
-					var $this = $(this);
-					slide = $this.index() + 1;
-					updateSlide($this.attr('src'));
-				};
-			// set the width of list - container
-			$('#list-container').css({'width' : slideCount * 65 + 'px'});
-			$('#list').append('<li id=' + i + ' >');
-			$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
-			$("#list #" + i).append('</li>');
+				for (var i = 1; i <= slideCount; i++) {	
+				// set the width of list - container
+				$('#list-container').css({'width' : slideCount * 65 + 'px'});
+				$('#list').append('<li id=' + i + ' >');
+				$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
+				$("#list #" + i).append('</li>');
+				$("#list #" + i).touch(slideTouchEvent);
 			// console.log($('#preview').html());
 		}
 	}
+
+		function slideTouchEvent() {
+			var $this = $(this);
+			var slide = $this.index() + 1;
+			updateSlide($this.attr('src'));
+			currentSlide = slide;
+			updateSlide('slides/Slide' + slide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+		}
 
 	function updateSlideStatus(currentSlide) {
 		$('#slide_status').text(currentSlide + ' / ' + slideCount);
