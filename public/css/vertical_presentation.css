@@ -137,11 +137,11 @@ body {
 #grid-view-container {
 	display: none;
 	width: 600px;
-	height: 600px;
+	height: 880px;
 	background-color: red;
 	position: fixed;
 	z-index: 10000;
-	overflow: auto;
+	overflow: scroll;
 }
 
 #grid-image-container {
