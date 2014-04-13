@@ -1,5 +1,5 @@
-/* Horizontal Orientation - presi remote *
- portrait: 601x881; landscape: 962x529 */
+/* Vertical Orientation - presi remote *
+portrait: 601x881; landscape: 962x529 */
 
 body {
 	background: white;
@@ -12,41 +12,38 @@ body {
 #container  {
 	left: 0;
 	top: 0;
-	width: 962px;
-	height: 529px;
+	width: 880px;
+	height: 600px;
+	position: absolute;
+	overflow: hidden;
 }
 
+.spacer {
+	height: 1%;
+}
 
-
-/*button panel */
+/* hideable button panel */
 
 #button_panel{
-	display: inline-block;
 	background-color:rgba(255,0,0,0.5);
-	
+	position:absolute;
 	height: 100%;
-	width: 18%;
-
+	width: 15%;
 	text-align: center;
+	z-index: 100;
 }
 
-#preview {
+/* top_panel style */
+
+#top_panel {
 	display: block;
-	height: 90%;
-	width: 100%;
-	background-color: green;
-	margin: 2px;
-	overflow: scroll;
-	overflow-x: hidden;
-}
-/* left_panel style */
-
-#left_panel {
-	display: inline-block;
 	background-color: yellow;
+	position:absolute;
+
 	text-align: center;
-	height: 100%;
-	width: 20%;
+	height: 10%;
+	width: 15%;
+	z-index: 200;
 }
 
 #timer {
@@ -55,73 +52,140 @@ body {
 	background-color: red;
 	vertical-align: center;
 	font-size: 1.2em;
-	height: 10%;
+	padding: 5%;
+	height: 50%;
 }
 
 #slide_status {
-	display: inline-block;
+	display: block;
 	text-align: center;
 	background-color: grey;
 	vertical-align: center;
 	font-size: 1.2em;
 	padding: 5%;
-	float: right;
+	height: 50%;
+}
+
+#grid_button {
+	
+}
+
+#annotation_button {
+
 }
 
 /* center_container styles go here */
 
 #center_container {
-	display: inline-block;
+	display: block;
+	position: absolute;
 	height: 100%;
-	width: 60%;
+	width: 70%;
+	top:0;
+	left: 15%;
 	background-color: orange;
 }
 
 #slide_container {
 	display: block;
-	height: 70%;
 	width: 100%;
+	height: 75%;
 	background-color: blue;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
+	overflow: hidden;
 }
 
 #notes_container {
-	display: none;
-	height: 30%;
-	width: 100%;
+	display: block;
+	height: 25%;
 	background-color: grey;
 }
 
-#grid_button {
-	position: absolute;
-	left: 800px;
-	top: 50px;
+#preview {
+	display: block;
+	background-color: green;
+	margin: 2px;
+	width: 15%;
+	height: 100%;
+	float: right;
+	overflow: scroll;
+	overflow-x: hidden;
 }
+
+#list-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#preview ul {
+	list-style-type: none;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+}
+
+#preview li {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+#preview ul img {	
+	border: 1px solid black;
+	height: 65px;
+	margin: 1px;
+}
+
+/* Styles for the hideable grid - view go here */
+#grid-view-container {
+	display: none;
+	width: 880px;
+	height: 600px;
+	background-color: red;
+	position: fixed;
+	z-index: 10000;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+#grid-image-container {
+	display: block;
+	height: 95%;
+}
+
+.grid-image {
+	border: 1px solid black;
+	width: 120px;
+	margin: 2px;
+}
+
+#grid-view-navigate {
+	display:none;
+	height: 5%;
+	width: 100%;
+	background-color: green;
+}
+
 #play_pause {
 	position: absolute;
-	left: 800px;
-	top: 150px;
+	top:150px;
+	left: 10px;
+}
+#grid_button {
+	position: absolute;
+	top:250px;
+	left: 10px;
+}
+#annotation_button {
+	position: absolute;
+	top:350px;
+	left: 10px;
 }
 #settings_button {
 	position: absolute;
-	left: 800px;
-	top: 250px;
-}
-
-#annotation_button {
-	position: absolute;
-	left: 800px;
-	top: 350px;
-}
-
-
-	
-
-
-#preview img {
-	border: 1px solid black;
-	width: 65px;
-	margin: 1px;
+	top:450px;
+	left: 10px;
 }
