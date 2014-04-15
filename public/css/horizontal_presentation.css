@@ -128,9 +128,9 @@ body {
 }
 
 #preview li {
-	display: inline-block;
+	display: block;
 	padding: 0;
-	margin: 0;
+	margin: 1%;
 }
 
 #preview ul img {	
