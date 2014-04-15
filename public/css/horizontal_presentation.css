@@ -25,11 +25,12 @@ body {
 /* hideable button panel */
 
 #button_panel{
-	background-color:rgba(255,0,0,0.5);
-	position:absolute;
+	background-color: rgba(7, 7, 7, 0.71);
+	position: absolute;
 	height: 100%;
 	width: 15%;
 	text-align: center;
+	border: 1px solid black;
 	z-index: 100;
 }
 
@@ -37,9 +38,7 @@ body {
 
 #top_panel {
 	display: block;
-	background-color: yellow;
 	position:absolute;
-
 	text-align: center;
 	height: 10%;
 	width: 15%;
@@ -49,9 +48,10 @@ body {
 #timer {
 	display: block;
 	text-align: center;
-	background-color: red;
+	background-color: #555550;
 	vertical-align: center;
 	font-size: 1.2em;
+	border: 1px solid black;
 	padding: 5%;
 	height: 50%;
 }
@@ -59,9 +59,10 @@ body {
 #slide_status {
 	display: block;
 	text-align: center;
-	background-color: grey;
+	background-color: #555550;
 	vertical-align: center;
 	font-size: 1.2em;
+	border: 1px solid black;
 	padding: 5%;
 	height: 50%;
 }
@@ -83,13 +84,13 @@ body {
 	width: 70%;
 	top:0;
 	left: 15%;
-	background-color: orange;
+	background-color: #1F1209;
 }
 
 #slide_container {
 	display: block;
-	height: 80%;
-	background-color: blue;
+	height: 100%;
+	background-color: #1F1209;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -99,13 +100,13 @@ body {
 
 #notes_container {
 	display: block;
-	height: 20%;
+	height: 0%;
 	background-color: grey;
 }
 
 #preview {
 	display: block;
-	background-color: green;
+	background-color: #555550;
 	margin: 2px;
 	width: 15%;
 	height: 100%;
@@ -144,7 +145,7 @@ body {
 	display: none;
 	width: 960px;
 	height: 440px;
-	background-color: red;
+	/*background-color: red;*/
 	position: fixed;
 	z-index: 10000;
 	overflow: scroll;
@@ -166,7 +167,7 @@ body {
 	display:none;
 	height: 5%;
 	width: 100%;
-	background-color: green;
+	/*background-color: green;*/
 }
 
 #play_pause {
