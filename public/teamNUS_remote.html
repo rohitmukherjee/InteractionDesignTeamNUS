@@ -3,6 +3,7 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
 	<meta name="mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<link rel="icon" type="image/png" href="presi_remote.png"/>
 
 	<title> Team NUS Presentation Remote </title>
@@ -23,7 +24,10 @@
 
 	<!-- Normalize.css to remove all kinds of browser padding / inconsistencies -->
 	<link href="css/normalize.css" rel="stylesheet" type="text/css">
-	<link href="css/vertical_presentation.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" media="screen and (max-width: 700px)" href="css/vertical_presentation.css">
+	<link rel="stylesheet" media="screen and (min-width: 701px)" href="css/horizontal_presentation.css">
+	<script type="text/javascript" src="js/presenter.js"></script>
+
 
 </head>
 <body>
