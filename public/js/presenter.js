@@ -63,8 +63,8 @@ $(function() {
 
 		// configure jQMultiTouch
 		// Hide the button panel on application start - up
-		 if (screen.width <= 700)
-		 $('#button_panel').hide();
+		 // if (screen.width <= 700)
+		 // $('#button_panel').hide();
 
 		$('#slide_container').touch(function() {
 			$('#button_panel').toggle('fade');
