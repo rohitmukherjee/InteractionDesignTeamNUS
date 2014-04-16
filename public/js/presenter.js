@@ -25,13 +25,8 @@ $(function() {
 
 	/* Handlers for showing and hiding the grid view  - PC*/
 
-	$('#grid_button').click(function() {
-		showGridView();
-	});
-
-	$('#grid-back').click(function() {
-		hideGridView();
-	});
+	$('#grid_button').click(showGridView);
+	$('#grid-back').click(hideGridView);
 
 	/* Touch Gestures go here */
 
@@ -68,11 +63,12 @@ $(function() {
 
 		// configure jQMultiTouch
 		// Hide the button panel on application start - up
-		// $('#button_panel').hide();
+		 if (screen.width <= 700)
+		 $('#button_panel').hide();
 
-		/*$('#slide_container').touch(function() {
+		$('#slide_container').touch(function() {
 			$('#button_panel').toggle('fade');
-		});*/
+		});
 		
 		$(document).ready(loadSlidePreview);
 
@@ -194,7 +190,7 @@ $(function() {
 				}
 				loadedIntoGridView = true;
 			}
-		}
+			}
 
 		function gridTouchSlide() {
 			var slideClickedOn = $(this).index() + 1;
