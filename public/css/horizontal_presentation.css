@@ -3,10 +3,23 @@ portrait: 601x881; landscape: 962x529 */
 
 body {
 	background: white;
-	font-family: Verdana;
+	font-family: Helvetica;
 	margin: 0;
 	padding: 0;
 	outline: 1px solid silver;
+}
+
+a {
+	display: inline-block;
+	background-color: #f05d32;
+	text-align: center;
+	width: 75px;
+	font-size: 0.8em;
+	font-family: 'Quicksand', sans-serif;
+	text-transform: uppercase;
+	color: #fff;
+	font-weight: 800;
+	padding: 5px 20px 5px 20px;
 }
 
 #container  {
@@ -108,7 +121,6 @@ body {
 #preview {
 	display: block;
 	background-color: #555550;
-	margin: 2px;
 	width: 15%;
 	height: 100%;
 	float: right;
@@ -166,7 +178,7 @@ body {
 
 #grid-view-navigate {
 	display:none;
-	height: 5%;
+	height: 6%;
 	width: 100%;
 	/*background-color: green;*/
 }
@@ -176,16 +188,19 @@ body {
 	top:120px;
 	left: 10px;
 }
+
 #grid_button {
 	position: absolute;
 	top:210px;
 	left: 10px;
 }
+
 #annotation_button {
 	position: absolute;
 	top:300px;
 	left: 10px;
 }
+
 #settings_button {
 	position: absolute;
 	top:390px;

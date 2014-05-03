@@ -145,14 +145,20 @@ $(function() {
 	}
 
 	function nextSlide() {
-		if (currentSlide == slideCount) return;
-		currentSlide ++;
+		if (currentSlide === slideCount) return;
+		if (!slideshow) {
+			currentSlide = 0;
+			slideshow = true;
+		}
+		currentSlide++;
+		console.log("Moving to next slide " + currentSlide);
 		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
 	}
 
 	function previousSlide() {
-		if (currentSlide == 1) return;
-		currentSlide --;
+		if (currentSlide === 1) return;
+		currentSlide--;
+		console.log("Moving to previous slide " + currentSlide);
 		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
 	}
 
