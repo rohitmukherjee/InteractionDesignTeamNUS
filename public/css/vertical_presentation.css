@@ -62,6 +62,7 @@ body {
 	display: inline-block;
 	text-align: center;
 	background-color: #555550;
+	background-size: 100%
 	vertical-align: center;
 	font-size: 1.2em;
 	border: 1px solid black;
@@ -171,6 +172,7 @@ body {
 
 #grid-image-container {
 	display: block;
+	height: 93%;
 }
 
 .grid-image {
@@ -181,7 +183,26 @@ body {
 
 #grid-view-navigate {
 	display:none;
-	height: 5%;
+	height: 7%;
+	width: 100%;
+	background-color: #555550;
+}
+
+/* Styles for settings view go here */
+#grid-view-container {
+	display: none;
+	width: 600px;
+	height: 880px;
+	background-color: #1F1209;
+	position: fixed;
+	z-index: 10000;
+	overflow: scroll;
+}
+
+#settings-view-navigate {
+	padding: 2px;
+	display:none;
+	height: 7%;
 	width: 100%;
 	background-color: #555550;
 }

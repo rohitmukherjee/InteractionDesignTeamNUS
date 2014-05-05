@@ -66,6 +66,24 @@
 		</div>
 		<div id="grid-image-container"></div>
 	</div>
+
+	<!-- Settings div, visible only on a click -->
+	<div id="settings-view-container">
+		<div id="settings-view-navigate">
+			<a id="settings-back">Back</a>
+		</div>
+		<div id="slide-container-slider">
+			<label for="slide-size">Slide Size</label>
+			<input type=range min=0 max=100 value=50 step="5" id='slide-size' onchange="outputUpdate(value)">
+			<output for="slide-size" id="slide-size-slider">100</output>
+		</div>
+	</div>
 	
+	<script>
+	function outputUpdate(sliderValue) {
+	document.querySelector('#slide-size-slider').value = sliderValue;
+	}
+
+</script>
 </body>
 </html>

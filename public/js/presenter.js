@@ -31,10 +31,18 @@ $(function() {
 	$('#grid_button').click(showGridView);
 	$('#grid-back').click(hideGridView);
 
+	$('#settings_button').click(showSettingsView);
+	$('#settings-back').click(hideSettingsView);	
+	$('#settings-back').touch(hideSettingsView); // Debugging purposes
+
 	/* Touch Gestures go here */
 
 	$('#grid_button').touch(showGridView);
 	$('#grid-back').touch(hideGridView);	
+	
+
+	$('#settings_button').touch(showSettingsView);
+	$('#settings-back').touch(hideSettingsView);
 
 
 	/* Handlers for handling slide show logic */
@@ -203,6 +211,29 @@ $(function() {
 			currentSlide = slideClickedOn;
 			updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
 			hideGridView();
+		}
+
+		/* Settings view specific code here*/
+		function showSettingsView() {
+			$('#settings-view-container').css({"display" : "block"});
+			$('#settings-view-navigate').css({"display" : "block"});
+			$('#slide-container-slider').css({"display" : "block"});
+		}
+
+		function hideSettingsView() {
+			$('#settings-view-container').css({"display" : "none"});
+			$('#settings-view-navigate').css({"display" : "none"});
+			$('#slide-container-slider').css({"display" : "none"});
+			setNewSlideContainerSize();
+		}
+
+		function setNewSlideContainerSize() {
+			var sliderValue = $("#slide-size-slider").html();
+			alert("Setting slide_container width to " + sliderValue);
+			$("#slide_container").css('height', sliderValue + '%');
+			$("#slide_container").css('background-size', sliderValue + '%');
+			$("#notes_container").css('height', (100 - sliderValue) + '%');
+			$("#slide_container").css('background-size', (100 - sliderValue) + '%');
 		}
 
 	})
