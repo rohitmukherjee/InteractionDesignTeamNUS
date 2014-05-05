@@ -16,7 +16,10 @@ $(function() {
 		if (!slideshow) {
 			slideshow = true;
 			updateSlide('slides/Slide' + currentSlide + '.PNG');
+			$(this).css('background-image','../icons/pause.png');
+
 		}
+		console.log("play clicked!")
 		if (!_handle)
 			startTimer();
 		else
@@ -92,16 +95,12 @@ $(function() {
 		// This bit is only to toggle the play and pause buttons
 		$('#play_pause').on("click", function() {
 			var el = $(this);
-			el.text() == el.data("text-swap") 
-			? el.text(el.data("text-original")) 
-			: el.text(el.data("text-swap"));
+		 	$(this).css('background-image','../icons/pause.png');
 		});
 
 		$('#play_pause').on("touch", function() {
 			var el = $(this);
-			el.text() == el.data("text-swap") 
-			? el.text(el.data("text-original")) 
-			: el.text(el.data("text-swap"));
+			$(this).css('background-image','../icons/pause.png');
 		});
 
 		/*---------*/

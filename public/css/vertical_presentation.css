@@ -69,11 +69,32 @@ body {
 	padding: 5%;
 }
 
+#settings_button {
+	background-image:url('../icons/settings.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+}
+
+#play_pause {
+	background-image:url('../icons/play.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+}
+
 #grid_button {
-	
+	background-image:url('../icons/grid.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
 }
 
 #annotation_button {
+	background-image:url('../icons/annotation.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
 
 }
 

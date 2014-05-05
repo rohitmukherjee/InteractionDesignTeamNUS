@@ -54,7 +54,7 @@ a {
 	display: block;
 	position:absolute;
 	text-align: center;
-	height: 10%;
+	height: 15%;
 	width: 15%;
 	z-index: 200;
 }
@@ -81,11 +81,37 @@ a {
 	height: 50%;
 }
 
+#settings_button {
+	background-image:url('../icons/settings.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+	margin-top: -20px;
+}
+
+#play_pause {
+	background-image:url('../icons/play.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+	margin-top: -20px;
+}
+
 #grid_button {
-	
+	background-image:url('../icons/grid.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+	margin-top: -20px;
 }
 
 #annotation_button {
+	background-image:url('../icons/annotation.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 50px;
+	position: absolute;
+	margin-top: -20px;
 
 }
 
