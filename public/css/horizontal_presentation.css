@@ -82,6 +82,9 @@ a {
 }
 
 #settings_button {
+	position: absolute;
+	top:390px;
+	left: 10px;
 	background-image:url('../icons/settings.png');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -90,6 +93,9 @@ a {
 }
 
 #play_pause {
+	position: absolute;
+	top:130px;
+	left: 10px;
 	background-image:url('../icons/play.png');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -98,6 +104,9 @@ a {
 }
 
 #grid_button {
+	position: absolute;
+	top:210px;
+	left: 10px;
 	background-image:url('../icons/grid.png');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -106,6 +115,9 @@ a {
 }
 
 #annotation_button {
+	position: absolute;
+	top:300px;
+	left: 10px;
 	background-image:url('../icons/annotation.png');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -207,28 +219,4 @@ a {
 	height: 6%;
 	width: 100%;
 	/*background-color: green;*/
-}
-
-#play_pause {
-	position: absolute;
-	top:120px;
-	left: 10px;
-}
-
-#grid_button {
-	position: absolute;
-	top:210px;
-	left: 10px;
-}
-
-#annotation_button {
-	position: absolute;
-	top:300px;
-	left: 10px;
-}
-
-#settings_button {
-	position: absolute;
-	top:390px;
-	left: 10px;
 }

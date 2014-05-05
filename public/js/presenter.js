@@ -69,9 +69,9 @@ $(function() {
 		 // if (screen.width <= 700)
 		 // $('#button_panel').hide();
 
-		$('#slide_container').touch(function() {
-			$('#button_panel').toggle('fade');
-		});
+		// $('#slide_container').touch(function() {
+		// 	$('#button_panel').toggle('fade');
+		// });
 		
 		$(document).ready(loadSlidePreview);
 
