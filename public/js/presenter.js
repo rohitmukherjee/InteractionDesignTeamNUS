@@ -159,6 +159,7 @@ $(function() {
 
 	function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
 		updateSlideStatus(currentSlide);
+		updateNotes();
 		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
 		if (typeof showEffect === 'undefined') showEffect = 'fade';
 		$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
@@ -170,57 +171,68 @@ $(function() {
 			}
 		}
 
-		/* Grid view specific code here */
-		function showGridView() {
-			$('#grid-view-container').css({"display" : "block"});
-			$('#grid-view-navigate').css({"display" : "block"});
-			$('#grid-image-container').css({"display" : "block"});
-			loadSlidesIntoGridView();
-		}
 
-		function hideGridView() {
-			$('#grid-view-container').css({"display" : "none"});
-			$('#grid-view-navigate').css({"display" : "none"});
-			$('#grid-image-container').css({"display" : "none"});
-		}
+	function updateNotes() {
+		$.get('notes/' + currentSlide + '.txt', function(data) {
+	    	if (data !== undefined)
+	 		   	$("#notes_container").text(data);
+		})
+		.fail(function() {
+			console.log(currentSlide + "has no notes");
+		});
+	}
 
-		function loadSlidesIntoGridView() {
-			if (!loadedIntoGridView) {
-				for (var i = 1; i <= slideCount; i++) {
-					$('<img></img>', { src: 'slides/Slide' + i + '.PNG' , class: 'grid-image'}).touch(gridTouchSlide).appendTo('#grid-image-container');
-				}
-				loadedIntoGridView = true;
+	/* Grid view specific code here */
+	function showGridView() {
+		$('#grid-view-container').css({"display" : "block"});
+		$('#grid-view-navigate').css({"display" : "block"});
+		$('#grid-image-container').css({"display" : "block"});
+		loadSlidesIntoGridView();
+	}
+
+	function hideGridView() {
+		$('#grid-view-container').css({"display" : "none"});
+		$('#grid-view-navigate').css({"display" : "none"});
+		$('#grid-image-container').css({"display" : "none"});
+	}
+
+	function loadSlidesIntoGridView() {
+		if (!loadedIntoGridView) {
+			for (var i = 1; i <= slideCount; i++) {
+				$('<img></img>', { src: 'slides/Slide' + i + '.PNG' , class: 'grid-image'}).touch(gridTouchSlide).appendTo('#grid-image-container');
 			}
-			}
-
-		function gridTouchSlide() {
-			var slideClickedOn = $(this).index() + 1;
-			console.log("You clicked on slideNumber " + slideClickedOn);
-			currentSlide = slideClickedOn;
-			updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-			hideGridView();
+			loadedIntoGridView = true;
+		}
 		}
 
-		/* Settings view specific code here*/
-		function showSettingsView() {
-			$('#settings-view-container').css({"display" : "block"});
-			$('#settings-view-navigate').css({"display" : "block"});
-			$('#slide-container-slider').css({"display" : "block"});
-		}
+	function gridTouchSlide() {
+		var slideClickedOn = $(this).index() + 1;
+		console.log("You clicked on slideNumber " + slideClickedOn);
+		currentSlide = slideClickedOn;
+		updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+		hideGridView();
+	}
 
-		function hideSettingsView() {
-			$('#settings-view-container').css({"display" : "none"});
-			$('#settings-view-navigate').css({"display" : "none"});
-			$('#slide-container-slider').css({"display" : "none"});
-			setNewSlideContainerSize();
-		}
+	/* Settings view specific code here*/
+	function showSettingsView() {
+		$('#settings-view-container').css({"display" : "block"});
+		$('#settings-view-navigate').css({"display" : "block"});
+		$('#slide-container-slider').css({"display" : "block"});
+	}
 
-		function setNewSlideContainerSize() {
-			var sliderValue = $("#slide-size-slider").html();
-			$("#slide_container").css('height', sliderValue + '%');
-			$("#slide_container").css('background-size', sliderValue + '%');
-			$("#notes_container").css('height', (100 - sliderValue) + '%');
-			$("#slide_container").css('background-size', (100 - sliderValue) + '%');
-		}
+	function hideSettingsView() {
+		$('#settings-view-container').css({"display" : "none"});
+		$('#settings-view-navigate').css({"display" : "none"});
+		$('#slide-container-slider').css({"display" : "none"});
+		setNewSlideContainerSize();
+	}
 
-	})
+	function setNewSlideContainerSize() {
+		var sliderValue = $("#slide-size-slider").html();
+		$("#slide_container").css('height', sliderValue + '%');
+		$("#slide_container").css('background-size', sliderValue + '%');
+		$("#notes_container").css('height', (100 - sliderValue) + '%');
+		$("#notes_container").css('background-size', (100 - sliderValue) + '%');
+	}
+
+})
