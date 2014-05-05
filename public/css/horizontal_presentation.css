@@ -97,7 +97,7 @@ a {
 	position: absolute;
 	top:130px;
 	left: 10px;
-	background-image:url('../icons/play.png');
+	background-image: url('../icons/play.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	height: 50px;
@@ -137,13 +137,12 @@ a {
 	width: 70%;
 	top:0;
 	left: 15%;
-	background-color: #1F1209;
+	background: url('../images/slide_container_background.png');
 }
 
 #slide_container {
 	display: block;
 	height: 100%;
-	background-color: #1F1209;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;

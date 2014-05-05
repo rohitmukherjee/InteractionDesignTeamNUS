@@ -105,12 +105,12 @@ body {
 	display: block;
 	height: 50%;
 	width: 100%;
+	background: url('../images/slide_container_background.png');
 }
 
 #slide_container {
 	display: block;
 	height: 98%;
-	background-color: #1F1209;
 	margin: 2px;
 	padding: 2px;
 	background-size: 100%;

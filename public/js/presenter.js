@@ -15,15 +15,18 @@ $(function() {
 	$('#play_pause').touch(function() {
 		if (!slideshow) {
 			slideshow = true;
+			$("#play_pause").css('background-image', 'icons/pause.PNG');
+			$("#play_pause").data("mode", "pause")
 			updateSlide('slides/Slide' + currentSlide + '.PNG');
-			$(this).css('background-image','../icons/pause.png');
-
 		}
-		console.log("play clicked!")
 		if (!_handle)
 			startTimer();
 		else
-			stopTimer();
+			{	
+				stopTimer();
+				$("#play_pause").css('background-image', 'icons/play.PNG');
+				$("#play_pause").data("mode", "play")
+			}
 	});
 
 	/* Handlers for showing and hiding the grid view  - PC*/
@@ -95,21 +98,6 @@ $(function() {
 		// connect to Presi
 		var socket = io.connect('http://' + window.location.host),
 		channel = location.hash || prompt('Channel:');
-
-		/*---------*/
-		/* preview */
-		/*---------*/
-
-		// This bit is only to toggle the play and pause buttons
-		$('#play_pause').on("click", function() {
-			var el = $(this);
-		 	$(this).css('background-image','../icons/pause.png');
-		});
-
-		$('#play_pause').on("touch", function() {
-			var el = $(this);
-			$(this).css('background-image','../icons/pause.png');
-		});
 
 		/*---------*/
 		/* Helper Functions */
@@ -229,7 +217,6 @@ $(function() {
 
 		function setNewSlideContainerSize() {
 			var sliderValue = $("#slide-size-slider").html();
-			alert("Setting slide_container width to " + sliderValue);
 			$("#slide_container").css('height', sliderValue + '%');
 			$("#slide_container").css('background-size', sliderValue + '%');
 			$("#notes_container").css('height', (100 - sliderValue) + '%');

@@ -32,7 +32,7 @@
 	<div id = "container">
 		<!-- This div contains the as  - Annotations, Settings and Grid - View. Visibility of this depends on user touch-->
 		<div id = "button_panel">
-			<a id = "play_pause"></a>
+			<a id = "play_pause" data-mode = "play"></a>
 			<a id = "grid_button"></a>
 			<a id = "annotation_button"></a>
 			<a id = "settings_button"></a>
@@ -74,8 +74,8 @@
 		</div>
 		<div id="slide-container-slider">
 			<label for="slide-size">Slide Size</label>
-			<input type=range min=0 max=100 value=50 step="5" id='slide-size' onchange="outputUpdate(value)">
-			<output for="slide-size" id="slide-size-slider">100</output>
+			<input type=range min=0 max=100 value=100 step="5" id='slide-size' onchange="outputUpdate(value)">
+			<output for="slide-size" id="slide-size-slider">80</output>
 		</div>
 	</div>
 	
