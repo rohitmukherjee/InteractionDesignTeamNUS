@@ -153,7 +153,11 @@ a {
 #notes_container {
 	display: block;
 	height: 0%;
-	background-color: grey;
+	font-family: Helvetica;
+	color: white;
+	padding-top: 5px;
+	padding-left: 2px;
+	/*background-color: grey;*/
 }
 
 #preview {

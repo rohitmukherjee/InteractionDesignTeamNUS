@@ -173,12 +173,15 @@ $(function() {
 
 
 	function updateNotes() {
+		$("#notes_container").empty();
 		$.get('notes/' + currentSlide + '.txt', function(data) {
-	    	if (data !== undefined)
-	 		   	$("#notes_container").text(data);
 		})
 		.fail(function() {
 			console.log(currentSlide + "has no notes");
+		})
+		.success(function(data) {
+			if (data !== undefined)
+	 		   	$("#notes_container").text(data);
 		});
 	}
 
