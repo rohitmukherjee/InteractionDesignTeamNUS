@@ -200,6 +200,7 @@ $(function() {
 	function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {
 		updateSlideStatus(currentSlide);
 		updateNotes();
+		updateScrollPreview();
 		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
 		if (typeof showEffect === 'undefined') showEffect = 'fade';
 		$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
@@ -276,6 +277,13 @@ $(function() {
 		$("#slide_container").css('background-size', sliderValue + '%');
 		$("#notes_container").css('height', (100 - sliderValue) + '%');
 		$("#notes_container").css('background-size', (100 - sliderValue) + '%');
+	}
+
+	function updateScrollPreview() {
+	var divId = $("#preview");
+	var scrollAmount = currentSlide;
+	console.log("Autoscrolling preview" + divId.scrollTop());
+	divId.scrollTop(scrollAmount * 65);	
 	}
 
 })
