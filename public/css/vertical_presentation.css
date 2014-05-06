@@ -145,7 +145,8 @@ body {
 	display: block;
 	background-color: #555550;
 	margin: 2px;
-	overflow: scroll;
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
 
 #list-container {

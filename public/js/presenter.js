@@ -279,11 +279,44 @@ $(function() {
 		$("#notes_container").css('background-size', (100 - sliderValue) + '%');
 	}
 
+	/* Functions to handle autoscrolling */
+
 	function updateScrollPreview() {
-	var divId = $("#preview");
-	var scrollAmount = currentSlide;
-	console.log("Autoscrolling preview" + divId.scrollTop());
-	divId.scrollTop(scrollAmount * 65);	
+		if ($(window).width() > 700) {
+			console.log("Device is in horizontal position");
+			updateScrollPreviewHorizontal();
+		}
+
+		else if ($(window).width() < 700) {
+			console.log("Device is in vertical position");
+			updateScrollPreviewVertical();
+		}
+	}
+
+	function updateScrollPreviewHorizontal() {
+		var divId = $("#preview");
+		var scrollAmount = currentSlide;
+		console.log("Autoscrolling preview vertically " + divId.scrollTop());
+		divId.scrollTop(scrollAmount * 65);
+	}
+
+	function updateScrollPreviewVertical() {
+		var divId = $("#preview");
+		var scrollAmount = currentSlide;
+		console.log("Autoscrolling preview horizontally " + divId.scrollLeft());
+		divId.scrollLeft(scrollAmount * 65 * 0.4);
+	}
+
+	/* Orientation specific helper functions */
+
+	function isVertical() {
+		var width =  $(window).width();
+		return Boolean(width < 700);
+	}
+
+	function isHorizontal() {
+		var width =  $(window).width();
+	    return Boolean(width >= 701);
 	}
 
 })
