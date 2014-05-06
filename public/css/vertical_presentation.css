@@ -30,11 +30,9 @@ body {
 	position:absolute;
 	height: 86px;
 	width: 600px;
-	position: fixed;
 	top:0;
 	left: 0;
-	text-align: center;
-	z-index: 10000;
+	z-index: 100;
 }
 
 /* top_panel style */
@@ -71,32 +69,47 @@ body {
 }
 
 #settings_button {
+
 	background-image:url('../icons/settings.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 50px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 460px;
 }
 
 #play_pause {
+
 	background-image:url('../icons/play.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 50px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 40px;
 }
 
 #grid_button {
+
 	background-image:url('../icons/grid.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 50px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 180px;
 }
 
 #annotation_button {
+
 	background-image:url('../icons/annotation.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 50px;
-
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 320px;
 }
 
 /* center_container styles go here */
@@ -294,4 +307,25 @@ input[type="range"]::-webkit-slider-thumb {
 	-moz-border-radius: 40px;
 	border-radius: 40px;
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+}
+#grid-back {
+	background-image:url('../icons/back.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 60px;
+	width: 50px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#settings-back {
+	background-image:url('../icons/back.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 60px;
+	width: 50px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
 }

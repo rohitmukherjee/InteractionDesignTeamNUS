@@ -28,9 +28,5 @@ body {
 }
 #grid-view-navigate {
 	height: 50px;
-	background-color: green;
 }
 
-#grid-back {
-	float: right;
-}

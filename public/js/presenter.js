@@ -13,25 +13,30 @@ $(function() {
 
 // Plays/Pauses slide show and timer on click. Used for starting the show as well
 	$('#play_pause').touch(function() {
+		
 		if (!slideshow) {
 			slideshow = true;
-			$("#play_pause").css('background-image', 'icons/pause.PNG');
-			$("#play_pause").data("mode", "pause")
+			// $("#play_pause").css('background-image', 'icons/pause.PNG');
+			
 			updateSlide('slides/Slide' + currentSlide + '.PNG');
 		}
-		if (!_handle)
+		if (!_handle){
+			$('#play_pause').css("background-image", "url(../icons/pause.png)"); 
+			$("#play_pause").data("mode", "pause")
 			startTimer();
+		}
 		else
-			{	
-				stopTimer();
-				$("#play_pause").css('background-image', 'icons/play.PNG');
-				$("#play_pause").data("mode", "play")
-			}
+		{	
+			stopTimer();
+			$('#play_pause').css("background-image", "url(../icons/play.png)"); 
+			$("#play_pause").data("mode", "play")
+		}
 	});
 
 	/* Handlers for showing and hiding the grid view  - PC*/
-
+	
 	$('#grid_button').click(showGridView);
+
 	$('#grid-back').click(hideGridView);
 
 	$('#settings_button').click(showSettingsView);
@@ -49,79 +54,126 @@ $(function() {
 
 
 	/* Handlers for handling slide show logic */
+	var el = document.getElementById('slide_container');
+    Hammer(el).on("swipeleft", function(event) {
+    	nextSlide();
+    });
 
-	$('#slide_container').dblclick(function () {
-		console.log("Double click triggered on slide_container");
-		previousSlide();
-	});
+    Hammer(el).on("swiperight", function(event) {
+        previousSlide();
+    });
+	// $('#slide_container').dblclick(function () {
+	// 	console.log("Double click triggered on slide_container");
+	// 	previousSlide();
+	// });
 
-	$('#slide_container').click(function () {
-		console.log("Single click triggered on slide_container");
-		nextSlide();
-	});
+	// $('#slide_container').click(function () {
+	// 	console.log("Single click triggered on slide_container");
+	// 	nextSlide();
+	// });
 
 
 	// predefined swipe left for next/swipe right for prev
-	$('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
-			// if (!$('#slide_container').is(':animated')) { // wait for animation to end
-				previousSlide();
-		}).swipe({ direction: 'left', distance: 'short', speed: 'medium' }, function() {
-			if (!$('#slide_container').is(':animated'))// wait for animation to end
-				nextSlide();
+	// $('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
+	// 		// if (!$('#slide_container').is(':animated')) { // wait for animation to end
+	// 			previousSlide();
+	// 	}).swipe({ direction: 'left', distance: 'short', speed: 'medium' }, function() {
+	// 		if (!$('#slide_container').is(':animated'))// wait for animation to end
+	// 			nextSlide();
 	
-		});
+	// 	});
 
-		/*---------*/
-		/* startup */
-		/*---------*/
+	/*---------*/
+	/* startup */
+	/*---------*/
 
-		// configure jQMultiTouch
-		// Hide the button panel on application start - up
-		 // if (screen.width <= 700)
-		 // $('#button_panel').hide();
+	// configure jQMultiTouch
+	// Hide the button panel on application start - up
 
-		// $('#slide_container').touch(function() {
-		// 	$('#button_panel').toggle('fade');
-		// });
+	
+	// $('#slide_container').touch(function() {
+	// 	$('#button_panel').toggle('fade');
+	// });
+	if (window.orientation == 0) {
+		console.log("Initial orientation is portrait!!");
+		$('#button_panel').hide();
+		var el = document.getElementById('slide_container');
+		Hammer(el).on("tap", function(event) {
+			$('#button_panel').toggle();
+	    });
+	    var el = document.getElementById('button_panel');
+		Hammer(el).on("tap", function(event) {
+			$('#button_panel').toggle();
+	    });
+	} else {
+		console.log("Initial orientation is landscape!!");
+		$('#button_panel').show();
+	}
+
+	$(window).on("orientationchange",function(){
 		
-		$(document).ready(loadSlidePreview);
+	  	if(window.orientation == 0) // Portrait
+	  	{
+	  		console.log("orientation changes to portrait!!");
+		    $('#button_panel').hide();
+			var el = document.getElementById('slide_container');
+			Hammer(el).on("tap", function(event) {
+				$('#button_panel').toggle();
+		    });
+		    var el = document.getElementById('button_panel');
+			Hammer(el).on("tap", function(event) {
+				$('#button_panel').toggle();
+		    });
+	  	}
+		else // Landscape
+		{
+			console.log("orientation changes to landscape!!");
+	    	$('#button_panel').show();
+			var el = document.getElementById('slide_container');
+			Hammer(el).off('tap');
+			Hammer(el).destroy();
+			var el = document.getElementById('button_panel');
+			Hammer(el).off('tap');
+			Hammer(el).destroy();
+	  	}
+	});
+	$(document).ready(loadSlidePreview);
 
-		$.touch.preventDefault = true; // disable default behaviour
+	$.touch.preventDefault = true; // disable default behaviour
 
-		$.touch.triggerMouseEvents = true; // enable mouse events
+	$.touch.triggerMouseEvents = true; // enable mouse events
 
-		$.touch.orientationChanged(function(e, orientation) {
-			// TODO handle orientation
-			//updateCanvas();
-		});
+	$.touch.orientationChanged(function(e, orientation) {
+		// TODO handle orientation
+		//updateCanvas();
+	});
 
-		// connect to Presi
-		var socket = io.connect('http://' + window.location.host),
-		channel = location.hash || prompt('Channel:');
+	// connect to Presi
+	var socket = io.connect('http://' + window.location.host),
+	channel = location.hash || prompt('Channel:');
 
-		/*---------*/
-		/* Helper Functions */
-		/*---------*/
+	/*---------*/
+	/* Helper Functions */
+	/*---------*/
 
-		function loadSlidePreview() {
-				for (var i = 1; i <= slideCount; i++) {	
-				// set the width of list - container
-				$('#list-container').css({'width' : slideCount * 65 + 'px'});
-				$('#list').append('<li id=' + i + ' >');
-				$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
-				$("#list #" + i).append('</li>');
-				$("#list #" + i).touch(slideTouchEvent);
-			// console.log($('#preview').html());
+	function loadSlidePreview() {
+		for (var i = 1; i <= slideCount; i++) {	
+			// set the width of list - container
+			$('#list-container').css({'width' : slideCount * 65 + 'px'});
+			$('#list').append('<li id=' + i + ' >');
+			$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
+			$("#list #" + i).append('</li>');
+			$("#list #" + i).touch(slideTouchEvent);
 		}
 	}
 
-		function slideTouchEvent() {
-			var $this = $(this);
-			var slide = $this.index() + 1;
-			updateSlide($this.attr('src'));
-			currentSlide = slide;
-			updateSlide('slides/Slide' + slide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
-		}
+	function slideTouchEvent() {
+		var $this = $(this);
+		var slide = $this.index() + 1;
+		updateSlide($this.attr('src'));
+		currentSlide = slide;
+		updateSlide('slides/Slide' + slide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+	}
 
 	function updateSlideStatus(currentSlide) {
 		$('#slide_status').text(currentSlide + ' / ' + slideCount);
@@ -154,7 +206,7 @@ $(function() {
 		if (currentSlide === 1) return;
 		currentSlide--;
 		console.log("Moving to previous slide " + currentSlide);
-		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
+		updateSlide('slides/Slide' + currentSlide + '.PNG', 'slide', { direction: 'right' }, 'slide', { direction: 'left' });
 	}
 
 	function updateSlide(url, hideEffect, hideEffectOptions, showEffect, showEffectOptions) {

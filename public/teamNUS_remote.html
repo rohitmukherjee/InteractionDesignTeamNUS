@@ -19,9 +19,12 @@
 	<script type="text/javascript" src="js/jquery.multitouch.js"></script>
 	<link href="css/jquery.multitouch.css" rel="stylesheet" type="text/css">
 
+	<!-- include hammer.js -->
+	<script type="text/javascript" src="js/hammer.min.js"></script>
+
 	<!-- include custom presenter -->
 	<script type="text/javascript" src="js/presenter.js"></script>
-
+	<link href="css/grid-view.css" rel="stylesheet" type="text/css">
 	<!-- Normalize.css to remove all kinds of browser padding / inconsistencies -->
 	<link href="css/normalize.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" media="screen and (max-width: 700px)" href="css/vertical_presentation.css">
@@ -62,7 +65,7 @@
 	<!-- Grid - View div, visible only on a click -->
 	<div id="grid-view-container">
 		<div id="grid-view-navigate">
-			<a id="grid-back">Back</a>
+			<a id="grid-back"></a>
 		</div>
 		<div id="grid-image-container"></div>
 	</div>
@@ -70,7 +73,7 @@
 	<!-- Settings div, visible only on a click -->
 	<div id="settings-view-container">
 		<div id="settings-view-navigate">
-			<a id="settings-back">Back</a>
+			<a id="settings-back"></a>
 		</div>
 		<div id="slide-container-slider">
 			<label for="slide-size">Slide Container Size</label>
