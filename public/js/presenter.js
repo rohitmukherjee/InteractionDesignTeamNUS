@@ -11,9 +11,10 @@ $(function() {
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
 	var loadedIntoGridView = false;
 
-// Plays/Pauses slide show and timer on click. Used for starting the show as well
-	$('#play_pause').touch(function() {
-		
+	// Plays/Pauses slide show and timer on click. Used for starting the show as well
+	var playPauseButton = document.getElementById('play_pause');
+	console.log("Binding playPause button");
+	Hammer(playPauseButton).on("tap", function(event) {
 		if (!slideshow) {
 			slideshow = true;
 			// $("#play_pause").css('background-image', 'icons/pause.PNG');
@@ -33,55 +34,51 @@ $(function() {
 		}
 	});
 
-	/* Handlers for showing and hiding the grid view  - PC*/
+	/* Handlers for showing and hiding the grid view */
 	
-	$('#grid_button').click(showGridView);
-
-	$('#grid-back').click(hideGridView);
-
-	$('#settings_button').click(showSettingsView);
-	$('#settings-back').click(hideSettingsView);	
-	$('#settings-back').touch(hideSettingsView); // Debugging purposes
-
-	/* Touch Gestures go here */
-
-	$('#grid_button').touch(showGridView);
-	$('#grid-back').touch(hideGridView);	
+	var gridButton = document.getElementById('grid_button'); 
+	var gridBack = document.getElementById('grid-back'); 
 	
+	gridBack.click(hideGridView);
+	gridButton.click(showGridView);
 
-	$('#settings_button').touch(showSettingsView);
-	$('#settings-back').touch(hideSettingsView);
+	console.log("Binding touch events to grid button");
+	Hammer(gridButton).on("tap", function(event) {
+	showGridView();
+	});
 
+	console.log("Binding touch events to grid back");
+	Hammer(gridBack).on("tap", function(event) {
+	hideGridView();
+	});
+
+	/* Handlers for showing and hiding the settings view */
+
+	var settingsButton = document.getElementById('settings_button'); 
+	var settingsBack = document.getElementById('settings-back'); 
+	
+	settingsButton.click(showSettingsView);
+	settingsBack.click(hideSettingsView);	
+
+	console.log("Binding touch events to settings button");
+	Hammer(settingsButton).on("tap", function(event) { 
+	showSettingsView();
+	});
+
+	console.log("Binding touch events to settings back");
+	Hammer(settingsBack).on("tap", function(event) {
+	hideSettingsView();
+	});
 
 	/* Handlers for handling slide show logic */
 	var el = document.getElementById('slide_container');
-    Hammer(el).on("swipeleft", function(event) {
+  	Hammer(el).on("swipeleft", function(event) {
     	nextSlide();
-    });
+    	});
 
-    Hammer(el).on("swiperight", function(event) {
+    	Hammer(el).on("swiperight", function(event) {
         previousSlide();
-    });
-	// $('#slide_container').dblclick(function () {
-	// 	console.log("Double click triggered on slide_container");
-	// 	previousSlide();
-	// });
-
-	// $('#slide_container').click(function () {
-	// 	console.log("Single click triggered on slide_container");
-	// 	nextSlide();
-	// });
-
-
-	// predefined swipe left for next/swipe right for prev
-	// $('#slide_container').swipe({ direction: 'right', distance: 'short', speed: 'medium' }, function() {
-	// 		// if (!$('#slide_container').is(':animated')) { // wait for animation to end
-	// 			previousSlide();
-	// 	}).swipe({ direction: 'left', distance: 'short', speed: 'medium' }, function() {
-	// 		if (!$('#slide_container').is(':animated'))// wait for animation to end
-	// 			nextSlide();
-	
-	// 	});
+    	});
 
 	/*---------*/
 	/* startup */
@@ -89,11 +86,7 @@ $(function() {
 
 	// configure jQMultiTouch
 	// Hide the button panel on application start - up
-
 	
-	// $('#slide_container').touch(function() {
-	// 	$('#button_panel').toggle('fade');
-	// });
 	if (window.orientation == 0) {
 		console.log("Initial orientation is portrait!!");
 		$('#button_panel').hide();
@@ -139,14 +132,9 @@ $(function() {
 	});
 	$(document).ready(loadSlidePreview);
 
-	$.touch.preventDefault = true; // disable default behaviour
+	//$.touch.preventDefault = true; // disable default behaviour
 
 	$.touch.triggerMouseEvents = true; // enable mouse events
-
-	$.touch.orientationChanged(function(e, orientation) {
-		// TODO handle orientation
-		//updateCanvas();
-	});
 
 	// connect to Presi
 	var socket = io.connect('http://' + window.location.host),
