@@ -6,6 +6,7 @@ $(function() {
 	var slideCount = 26;
 	var timer = 0;
 	var slideshow = false;
+	var mode = 'slideshow';	
 	var currentSlide = 1;
 	var _handle = false;
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
@@ -44,14 +45,30 @@ $(function() {
 
 	console.log("Binding touch events to grid button");
 	Hammer(gridButton).on("tap", function(event) {
-	showGridView();
+		showGridView();
 	});
 
 	console.log("Binding touch events to grid back");
 	Hammer(gridBack).on("tap", function(event) {
 	hideGridView();
 	});
+	
+	/* Handlers for showing and hiding annotation view */
+	var annotationButton = document.getElementById('annotation_button');
+	var annotationBack = document.getElementById('annotation-back');
 
+	annotationButton.click(showAnnotationView);
+	annotationBack.click(hideAnnotationView);
+
+	console.log("Binding touch events to annotation button");
+	Hammer(annotationButton).on("tap", function(event) {
+		showAnnotationView();
+	});
+
+	console.log("Binding touch events to annotation back button");
+	Hammer(annotationBack).on("tap", function(event) {
+		hideAnnotationView();
+	});
 	/* Handlers for showing and hiding the settings view */
 
 	var settingsButton = document.getElementById('settings_button'); 
@@ -62,12 +79,12 @@ $(function() {
 
 	console.log("Binding touch events to settings button");
 	Hammer(settingsButton).on("tap", function(event) { 
-	showSettingsView();
+		showSettingsView();
 	});
 
 	console.log("Binding touch events to settings back");
 	Hammer(settingsBack).on("tap", function(event) {
-	hideSettingsView();
+		hideSettingsView();
 	});
 
 	/* Handlers for handling slide show logic */
@@ -255,7 +272,7 @@ $(function() {
 		updateSlide('slides/Slide' + slideClickedOn + '.PNG', 'slide', { direction: 'left' }, 'slide', { direction: 'right' });
 		hideGridView();
 	}
-
+	
 	/* Settings view specific code here*/
 	function showSettingsView() {
 		$('#settings-view-container').css({"display" : "block"});
@@ -278,4 +295,143 @@ $(function() {
 		$("#notes_container").css('background-size', (100 - sliderValue) + '%');
 	}
 
+	/* Annotation View specific code here*/
+	function showAnnotationView() {
+		$('#annotation_panel').css({"display" : "block"});
+		$('#button_panel').css({"display" : "none"});
+	}
+
+	function hideAnnotationView() {
+		$('#annotation_panel').css({"display" : "none"});
+		$('#button_panel').css({"display" : "block"});
+		clearCanvas();
+		mode='slideshow';
+		$('#canvas').hide();
+	}
+
+	//Pen
+	$('#annotation-pen').touch(function(){
+		if (mode != 'pen') {
+			mode = 'pen';
+			$('canvas').touchable({
+				touchDown: function() { return false; }, // do nothing
+				touchMove: drawPen,
+				touchUp: function() { return false; }, // do nothing
+			}).show();
+		} else {
+			mode = 'slideshow';
+			$('#canvas').hide();
+		}
+		updateCanvas();
+	});
+
+	// highlight
+	$('#annotation-highlight').touch(function(){
+		if (mode != 'highlight') {
+			mode = 'highlight';
+			$('canvas').touchable({
+				touchDown: function() { return false; }, // do nothing
+				touchMove: drawHighlight,
+				touchUp: function() { return false; }, // do nothing
+			}).show();
+		} else {
+			mode = 'slideshow';
+			$('canvas').hide();
+			clearCanvas();
+		}
+		updateCanvas();
+	});
+
+	//laser
+	$('#annotation-laser').touch(function(){
+		if (mode != 'laser') {
+			mode = 'laser';
+			updateCanvas();
+			$('canvas').touchable({
+				touchDown: drawLaser,
+				touchMove: drawLaser,
+				touchUp: clearCanvas,
+			}).show();
+		} else {
+			mode = 'slideshow';
+			$('canvas').hide();
+			clearCanvas();
+		}
+		updateCanvas();
+	});
+
+	function drawLaser(e) {
+		var ctx = this.getContext('2d'),
+			$this = $(this),
+			offset = $this.offset(),
+			x = e.clientX-5-offset.left,
+			y = e.clientY-5-offset.top;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.beginPath();
+		ctx.arc(x, y, 10, 0, Math.PI*2, true);
+		ctx.fillStyle = '#ff0000';
+		ctx.fill();
+		if (slideshow) { // only update display if slideshow is running
+			socket.emit('issueCommand', { channel: channel, command: 'drawLaser', x: x, y: y });
+		}
+	}
+
+	function drawPen(e, h) {
+		var ctx = this.getContext('2d'),
+			$this = $(this),
+			offset = $this.offset(),
+			e2 = h.get(0) || e,
+			x1 = e2.clientX-offset.left,
+			y1 = e2.clientY-offset.top,
+			x2 = e.clientX-offset.left,
+			y2 = e.clientY-offset.top;
+		ctx.beginPath();
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+		ctx.lineCap = 'round';
+		ctx.lineWidth = 5;
+		ctx.strokeStyle = '#ff0000';
+		ctx.stroke();
+		if (slideshow) { // only update display if slideshow is running
+			socket.emit('issueCommand', { channel: channel, command: 'drawPen', x1: x1, x2: x2, y1: y1, y2: y2 });
+		}
+	}
+
+	function drawHighlight(e, h) {
+		var ctx = this.getContext('2d'),
+			$this = $(this),
+			offset = $this.offset(),
+			e2 = h.get(0) || e,
+			x1 = e2.clientX-offset.left,
+			y1 = e2.clientY-offset.top,
+			x2 = e.clientX-offset.left,
+			y2 = e.clientY-offset.top;
+		ctx.beginPath();
+		ctx.moveTo(x1, y1);
+		ctx.lineTo(x2, y2);
+		ctx.lineCap = 'square';
+		ctx.lineWidth = 20;
+		ctx.strokeStyle = '#ffff00';
+		ctx.stroke();
+		if (slideshow) { // only update display if slideshow is running
+			socket.emit('issueCommand', { channel: channel, command: 'drawHighlight', x1: x1, x2: x2, y1: y1, y2: y2 });
+		}
+	}
+	function updateCanvas() {
+		// resize canvas
+		var $slide = $('#slide_container'),
+			width = $slide.width(),
+			height = $slide.height();
+		$('canvas').attr({ width: width, height: height });
+		// calibrate canvas on Presi Display
+		socket.emit('issueCommand', { channel: channel, command: 'canvas', width: width, height: height });
+	}
+
+	function clearCanvas() {
+		var ctx = canvas.getContext('2d');
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		if (slideshow) { // only update display if slideshow is running
+			socket.emit('issueCommand', { channel: channel, command: 'clearCanvas' });
+		}
+	}
 })

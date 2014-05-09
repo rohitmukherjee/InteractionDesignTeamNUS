@@ -40,6 +40,13 @@
 			<a id = "annotation_button"></a>
 			<a id = "settings_button"></a>
 		</div>
+		<!-- This div contains annotation tools, active only when annotation button is pressed-->
+		<div id="annotation_panel">
+			<a id="annotation-pen">Pen</a>
+			<a id="annotation-highlight">Highlight</a>
+			<a id="annotation-laser">Laser</a>
+			<a id="annotation-back"></a>
+		</div>
 		<!-- This div contains the timer/slide status -->
 		<div id = "top_panel">
 			<div id = "timer"> 0:00 </div>
@@ -48,10 +55,11 @@
 		
 		<div id = "center_container">
 			<!-- This div contains the slides -->
-			<div id = "slide_container"></div>
+			<div id = "slide_container"><canvas id="canvas" class="orientable"></canvas></div>
 
 			<!-- This div contains the notes -->
 			<div id = "notes_container"></div>
+			
 		</div>
 
 		<!-- This div contains the preview -->
