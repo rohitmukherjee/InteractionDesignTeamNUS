@@ -296,6 +296,7 @@ $(function() {
 		$("#notes_container").css('background-size', (100 - sliderValue) + '%');
 	}
 
+<<<<<<< HEAD
 	/* Annotation View specific code here*/
 	function showAnnotationView() {
 		$('#annotation_panel').css({"display" : "block"});
@@ -435,6 +436,7 @@ $(function() {
 			socket.emit('issueCommand', { channel: channel, command: 'clearCanvas' });
 		}
 	}
+=======
 	/* Functions to handle autoscrolling */
 
 	function updateScrollPreview() {
@@ -475,4 +477,5 @@ $(function() {
 	    return Boolean(width >= 701);
 	}
 
+>>>>>>> 5953140250e807d9ec35a6ae47ae23623aac2c5b
 })
