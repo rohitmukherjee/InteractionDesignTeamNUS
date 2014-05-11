@@ -9,6 +9,7 @@ $(function() {
 	var mode = 'slideshow';	
 	var currentSlide = 1;
 	var _handle = false;
+	var color = '#ff0000';
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
 	var loadedIntoGridView = false;
 
@@ -56,6 +57,10 @@ $(function() {
 	/* Handlers for showing and hiding annotation view */
 	var annotationButton = document.getElementById('annotation_button');
 	var annotationBack = document.getElementById('annotation-back');
+	var redButton = document.getElementById('color-red');
+	var yellowButton = document.getElementById('color-yellow');
+	var greenButton = document.getElementById('color-green');
+	var blueButton = document.getElementById('color-blue');
 
 	annotationButton.click(showAnnotationView);
 	annotationBack.click(hideAnnotationView);
@@ -68,6 +73,19 @@ $(function() {
 	console.log("Binding touch events to annotation back button");
 	Hammer(annotationBack).on("tap", function(event) {
 		hideAnnotationView();
+	});
+
+	Hammer(redButton).on("tap", function(event) {
+		pickColor('r');
+	});
+	Hammer(yellowButton).on("tap", function(event) {
+		pickColor('y');
+	});
+	Hammer(greenButton).on("tap", function(event) {
+		pickColor('g');
+	});
+	Hammer(blueButton).on("tap", function(event) {
+		pickColor('b');
 	});
 	/* Handlers for showing and hiding the settings view */
 
@@ -308,12 +326,15 @@ $(function() {
 		clearCanvas();
 		mode='slideshow';
 		$('#canvas').hide();
+		hideColorPicker();
 	}
 
 	//Pen
 	$('#annotation-pen').touch(function(){
 		if (mode != 'pen') {
 			mode = 'pen';
+			showColorPicker();
+			pickColor('r');
 			$('canvas').touchable({
 				touchDown: function() { return false; }, // do nothing
 				touchMove: drawPen,
@@ -330,6 +351,8 @@ $(function() {
 	$('#annotation-highlight').touch(function(){
 		if (mode != 'highlight') {
 			mode = 'highlight';
+			showColorPicker();
+			pickColor('y');
 			$('canvas').touchable({
 				touchDown: function() { return false; }, // do nothing
 				touchMove: drawHighlight,
@@ -347,6 +370,8 @@ $(function() {
 	$('#annotation-laser').touch(function(){
 		if (mode != 'laser') {
 			mode = 'laser';
+			pickColor('r');
+			showColorPicker();
 			updateCanvas();
 			$('canvas').touchable({
 				touchDown: drawLaser,
@@ -370,7 +395,7 @@ $(function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
 		ctx.arc(x, y, 10, 0, Math.PI*2, true);
-		ctx.fillStyle = '#ff0000';
+		ctx.fillStyle = color;
 		ctx.fill();
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'drawLaser', x: x, y: y });
@@ -391,7 +416,7 @@ $(function() {
 		ctx.lineTo(x2, y2);
 		ctx.lineCap = 'round';
 		ctx.lineWidth = 5;
-		ctx.strokeStyle = '#ff0000';
+		ctx.strokeStyle = color;
 		ctx.stroke();
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'drawPen', x1: x1, x2: x2, y1: y1, y2: y2 });
@@ -412,7 +437,7 @@ $(function() {
 		ctx.lineTo(x2, y2);
 		ctx.lineCap = 'square';
 		ctx.lineWidth = 20;
-		ctx.strokeStyle = '#ffff00';
+		ctx.strokeStyle = color;
 		ctx.stroke();
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'drawHighlight', x1: x1, x2: x2, y1: y1, y2: y2 });
@@ -433,6 +458,39 @@ $(function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'clearCanvas' });
+		}
+	}
+
+	function showColorPicker() {
+		$('#annotation-color-picker').css({"display" : "block"});
+	}
+
+	function hideColorPicker() {
+		$('#annotation-color-picker').css({"display" : "none"});
+	}
+
+	function pickColor(c) {
+		$('#color-yellow').css({"border": "0px solid red"});
+		$('#color-green').css({"border": "0px solid red"});
+		$('#color-blue').css({"border": "0px solid red"});
+		$('#color-red').css({"border": "0px solid red"});
+		switch(c) {
+			case 'y':
+				color = '#ffff00';
+				$('#color-yellow').css({"border": "1px solid red"});
+			break;
+			case 'r':
+				color = '#ff0000';
+				$('#color-red').css({"border": "1px solid red"});
+			break;
+			case 'b':
+				color = '#0066FF';
+				$('#color-blue').css({"border": "1px solid red"});
+			break;
+			case 'g':
+				color = '#00FF00';
+				$('#color-green').css({"border": "1px solid red"});
+			break;
 		}
 	}
 	/* Functions to handle autoscrolling */
