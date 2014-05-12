@@ -343,6 +343,8 @@ $(function() {
 		} else {
 			mode = 'slideshow';
 			$('#canvas').hide();
+			clearCanvas();
+			hideColorPicker();
 		}
 		updateCanvas();
 	});
@@ -362,6 +364,7 @@ $(function() {
 			mode = 'slideshow';
 			$('canvas').hide();
 			clearCanvas();
+			hideColorPicker();
 		}
 		updateCanvas();
 	});
@@ -370,8 +373,8 @@ $(function() {
 	$('#annotation-laser').touch(function(){
 		if (mode != 'laser') {
 			mode = 'laser';
-			pickColor('r');
 			showColorPicker();
+			pickColor('r');
 			updateCanvas();
 			$('canvas').touchable({
 				touchDown: drawLaser,
@@ -382,6 +385,7 @@ $(function() {
 			mode = 'slideshow';
 			$('canvas').hide();
 			clearCanvas();
+			hideColorPicker();
 		}
 		updateCanvas();
 	});
@@ -463,17 +467,16 @@ $(function() {
 
 	function showColorPicker() {
 		$('#annotation-color-picker').css({"display" : "block"});
+		deSelectColor();
 	}
 
 	function hideColorPicker() {
 		$('#annotation-color-picker').css({"display" : "none"});
+		deSelectColor();
 	}
 
 	function pickColor(c) {
-		$('#color-yellow').css({"border": "0px solid red"});
-		$('#color-green').css({"border": "0px solid red"});
-		$('#color-blue').css({"border": "0px solid red"});
-		$('#color-red').css({"border": "0px solid red"});
+		deSelectColor();
 		switch(c) {
 			case 'y':
 				color = '#ffff00';
@@ -492,6 +495,13 @@ $(function() {
 				$('#color-green').css({"border": "1px solid red"});
 			break;
 		}
+	}
+
+	function deSelectColor() {
+		$('#color-yellow').css({"border": "1px solid green"});
+		$('#color-green').css({"border": "1px solid green"});
+		$('#color-blue').css({"border": "1px solid green"});
+		$('#color-red').css({"border": "1px solid green"});
 	}
 	/* Functions to handle autoscrolling */
 
