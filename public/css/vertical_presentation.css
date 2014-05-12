@@ -34,7 +34,16 @@ body {
 	left: 0;
 	z-index: 100;
 }
-
+#annotation_panel{
+	background-color: rgba(49, 43, 43, 0.73);
+	display: block;
+	position:absolute;
+	height: 86px;
+	width: 600px;
+	top:0;
+	left: 0;
+	z-index: 100;
+}
 /* top_panel style */
 
 #top_panel {
@@ -331,4 +340,59 @@ input[type="range"]::-webkit-slider-thumb {
 	position: absolute;
 	left: 0px;
 	top: 0px;
+}
+#annotation-pen {
+	/*background-image:url('../icons/pen-icon.png');*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:80px 60px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 40px;
+}
+#annotation-highlight {
+	/*background-image:url('../icons/highlighter-yellow-icon.png');*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:80px 60px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 140px;
+}
+#annotation-laser {
+	/*background-image:url('../icons/pointer.png');*/
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:80px 60px;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 240px;
+}
+#annotation-back {
+	background-image:url('../icons/back.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 340px;
+	top: 0px;
+}
+#annotation-color-picker {
+	/*background-image:url('../icons/back.png');*/
+	/*background-repeat: no-repeat;*/
+	/*background-position: center;*/
+	position: absolute;
+	height: 80px;
+	width: 100px;
+	margin-left: 440px;
+	display:none;
+}
+#color-red,#color-green,#color-yellow,#color-blue {
+	float: left;
+	height:25;
+	width:15;
 }
