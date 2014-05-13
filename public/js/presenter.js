@@ -126,9 +126,7 @@ $(function() {
 		console.log("Initial orientation is portrait!!");
 		$('#button_panel').hide();
 		var el = document.getElementById('slide_container');
-		Hammer(el).on("tap", toggleButtonPanel);
-	    var el = document.getElementById('button_panel');
-		Hammer(el).on("tap", toggleButtonPanel);
+		Hammer(el).on("tap.slidecontainer", toggleButtonPanel);
 	} else {
 		console.log("Initial orientation is landscape!!");
 		$('#button_panel').show();
@@ -141,7 +139,7 @@ $(function() {
 	  		console.log("orientation changes to portrait!!");
 		    $('#button_panel').hide();
 			var el = document.getElementById('slide_container');
-			Hammer(el).on("tap", toggleButtonPanel);
+			Hammer(el).on("tap.slidecontainer", toggleButtonPanel);
 	  	}
 		else // Landscape
 		{
@@ -151,13 +149,8 @@ $(function() {
 	    	if (annotation_state === "none")
 	    	$('#button_panel').show();
 			var el = document.getElementById('slide_container');
-			Hammer(el).off('tap');
+			Hammer(el).off('tap.slidecontainer', toggleButtonPanel);
 			Hammer(el).destroy();
-			var el = document.getElementById('button_panel');
-			// Have to unbind the tap to hide here
-			Hammer(el).off('tap', toggleButtonPanel);
-			Hammer(el).destroy();
-
 	  	}
 	});
 	$(document).ready(loadSlidePreview);
@@ -510,12 +503,12 @@ $(function() {
 	/* Functions to handle autoscrolling */
 
 	function updateScrollPreview() {
-		if (window.orientation != 0) {
+		if (window.orientation !== 0) {
 			console.log("Device is in horizontal position");
 			updateScrollPreviewHorizontal();
 		}
 
-		else if (window.orientation == 0) {
+		else if (window.orientation === 0) {
 			console.log("Device is in vertical position");
 			updateScrollPreviewVertical();
 		}
