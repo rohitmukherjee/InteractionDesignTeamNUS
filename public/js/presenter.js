@@ -335,6 +335,7 @@ $(function() {
 			mode = 'pen';
 			showColorPicker();
 			pickColor('r');
+			highlightIcon($('#annotation-pen'));
 			$('canvas').touchable({
 				touchDown: function() { return false; }, // do nothing
 				touchMove: drawPen,
@@ -355,6 +356,7 @@ $(function() {
 			mode = 'highlight';
 			showColorPicker();
 			pickColor('y');
+			highlightIcon($('#annotation-highlight'));
 			$('canvas').touchable({
 				touchDown: function() { return false; }, // do nothing
 				touchMove: drawHighlight,
@@ -376,6 +378,7 @@ $(function() {
 			showColorPicker();
 			pickColor('r');
 			updateCanvas();
+			highlightIcon($('#annotation-laser'));
 			$('canvas').touchable({
 				touchDown: drawLaser,
 				touchMove: drawLaser,
@@ -495,6 +498,12 @@ $(function() {
 				$('#color-green').css({"border": "1px solid red"});
 			break;
 		}
+	}
+	function highlightIcon(i) {
+		$('#annotation-pen').css({"border":"0"});
+		$('#annotation-highlight').css({"border":"0"});
+		$('#annotation-laser').css({"border":"0"});
+		i.css({"border":"#ff0000 thin solid"});
 	}
 
 	function deSelectColor() {
