@@ -1,4 +1,3 @@
-
 $(function() {
 
 	/** Declare state variables and constants here*/
@@ -122,11 +121,11 @@ $(function() {
 	// configure jQMultiTouch
 	// Hide the button panel on application start - up
 	
-	if (window.orientation == 0) {
+	if (window.orientation === 0) {
 		console.log("Initial orientation is portrait!!");
 		$('#button_panel').hide();
 		var el = document.getElementById('slide_container');
-		Hammer(el).on("tap.slidecontainer", toggleButtonPanel);
+		Hammer(el).on("tap", toggleButtonPanel);
 	} else {
 		console.log("Initial orientation is landscape!!");
 		$('#button_panel').show();
@@ -134,22 +133,21 @@ $(function() {
 
 	$(window).on("orientationchange",function(){
 		
-	  	if(window.orientation == 0) // Portrait
+	  	if(window.orientation === 0) // Portrait
 	  	{
 	  		console.log("orientation changes to portrait!!");
 		    $('#button_panel').hide();
 			var el = document.getElementById('slide_container');
-			Hammer(el).on("tap.slidecontainer", toggleButtonPanel);
+			Hammer(el).on("tap", toggleButtonPanel);
 	  	}
 		else // Landscape
 		{
 			console.log("orientation changes to landscape!!");
 	    	var annotation_state = $("#annotation_panel").css("display");
-	    	alert(annotation_state);
 	    	if (annotation_state === "none")
 	    	$('#button_panel').show();
 			var el = document.getElementById('slide_container');
-			Hammer(el).off('tap.slidecontainer', toggleButtonPanel);
+			Hammer(el).off('tap', toggleButtonPanel);
 			Hammer(el).destroy();
 	  	}
 	});
@@ -503,15 +501,12 @@ $(function() {
 	/* Functions to handle autoscrolling */
 
 	function updateScrollPreview() {
-		if (window.orientation !== 0) {
-			console.log("Device is in horizontal position");
-			updateScrollPreviewHorizontal();
-		}
-
-		else if (window.orientation === 0) {
+		 if (window.orientation === 0 || window.orientation === 180) {
 			console.log("Device is in vertical position");
 			updateScrollPreviewVertical();
 		}
+		else if (window.orientation === 90 || window.orientation === 270 || window.orientation == -90)
+			updateScrollPreviewHorizontal();
 	}
 
 	function updateScrollPreviewHorizontal() {
