@@ -34,15 +34,16 @@ body {
 	left: 0;
 	z-index: 100;
 }
+
 #annotation_panel{
-	background-color: rgba(49, 43, 43, 0.73);
-	display: block;
+	background-color: #555550;
+	display: none;
 	position:absolute;
 	height: 86px;
 	width: 600px;
 	top:0;
 	left: 0;
-	z-index: 100;
+	z-index: 10000;
 }
 /* top_panel style */
 
