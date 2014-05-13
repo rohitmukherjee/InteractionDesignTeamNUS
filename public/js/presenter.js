@@ -142,6 +142,7 @@ $(function() {
 	  	}
 		else // Landscape
 		{
+			$("#preview").scrollLeft(0);
 			console.log("orientation changes to landscape!!");
 	    	var annotation_state = $("#annotation_panel").css("display");
 	    	if (annotation_state === "none")
