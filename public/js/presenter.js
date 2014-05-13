@@ -156,6 +156,9 @@ $(function() {
 		else // Landscape
 		{
 			console.log("orientation changes to landscape!!");
+	    	var annotation_state = $("#annotation_panel").css("display");
+	    	alert(annotation_state);
+	    	if (annotation_state === "none")
 	    	$('#button_panel').show();
 			var el = document.getElementById('slide_container');
 			Hammer(el).off('tap');
@@ -515,12 +518,12 @@ $(function() {
 	/* Functions to handle autoscrolling */
 
 	function updateScrollPreview() {
-		if ($(window).width() > 700) {
+		if (window.orientation != 0) {
 			console.log("Device is in horizontal position");
 			updateScrollPreviewHorizontal();
 		}
 
-		else if ($(window).width() < 700) {
+		else if (window.orientation == 0) {
 			console.log("Device is in vertical position");
 			updateScrollPreviewVertical();
 		}
