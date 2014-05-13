@@ -126,13 +126,9 @@ $(function() {
 		console.log("Initial orientation is portrait!!");
 		$('#button_panel').hide();
 		var el = document.getElementById('slide_container');
-		Hammer(el).on("tap", function(event) {
-			$('#button_panel').toggle();
-	    });
+		Hammer(el).on("tap", toggleButtonPanel);
 	    var el = document.getElementById('button_panel');
-		Hammer(el).on("tap", function(event) {
-			$('#button_panel').toggle();
-	    });
+		Hammer(el).on("tap", toggleButtonPanel);
 	} else {
 		console.log("Initial orientation is landscape!!");
 		$('#button_panel').show();
@@ -145,13 +141,7 @@ $(function() {
 	  		console.log("orientation changes to portrait!!");
 		    $('#button_panel').hide();
 			var el = document.getElementById('slide_container');
-			Hammer(el).on("tap", function(event) {
-				$('#button_panel').toggle();
-		    });
-		    var el = document.getElementById('button_panel');
-			Hammer(el).on("tap", function(event) {
-				$('#button_panel').toggle();
-		    });
+			Hammer(el).on("tap", toggleButtonPanel);
 	  	}
 		else // Landscape
 		{
@@ -164,8 +154,10 @@ $(function() {
 			Hammer(el).off('tap');
 			Hammer(el).destroy();
 			var el = document.getElementById('button_panel');
-			Hammer(el).off('tap');
+			// Have to unbind the tap to hide here
+			Hammer(el).off('tap', toggleButtonPanel);
 			Hammer(el).destroy();
+
 	  	}
 	});
 	$(document).ready(loadSlidePreview);
@@ -554,5 +546,9 @@ $(function() {
 		var width =  $(window).width();
 	    return Boolean(width >= 701);
 	}
+
+	function toggleButtonPanel() {
+		$('#button_panel').toggle();
+    }
 
 })
