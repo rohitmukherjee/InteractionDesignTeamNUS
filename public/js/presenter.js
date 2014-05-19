@@ -172,7 +172,7 @@ $(function() {
 			// set the width of list - container
 			$('#list-container').css({'width' : slideCount * 65 + 'px'});
 			$('#list').append('<li id=' + i + ' >');
-			$('<img></img>', { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
+			$("<img></img>", { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
 			$("#list #" + i).append('</li>');
 			$("#list #" + i).touch(slideTouchEvent);
 		}
@@ -529,8 +529,8 @@ $(function() {
 	}
 
 	function updateHighlightedPreview() {
-		$("#" + currentHilightedPreview).css({"border": "0"});
-		$("#" + currentSlide).css({"border": "2px solid red"});
+		$("#" + currentHilightedPreview + ' img').css({"border": "0"});
+		$("#" + currentSlide + ' img').css({"border": "2px solid red"});
 		currentHilightedPreview = currentSlide;
 	}
 
