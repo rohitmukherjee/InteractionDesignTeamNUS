@@ -107,13 +107,9 @@ $(function() {
 
 	/* Handlers for handling slide show logic */
 	var el = document.getElementById('slide_container');
-  	Hammer(el).on("swipeleft", function(event) {
-    	nextSlide();
-    	});
+  	Hammer(el).on("swipeleft", nextSlide);
 
-    	Hammer(el).on("swiperight", function(event) {
-        previousSlide();
-    	});
+	Hammer(el).on("swiperight", previousSlide);
 
 	/*---------*/
 	/* startup */
@@ -306,6 +302,11 @@ $(function() {
 	function showAnnotationView() {
 		$('#annotation_panel').css({"display" : "block"});
 		$('#button_panel').css({"display" : "none"});
+		var el = document.getElementById('slide_container');
+	  	Hammer(el).off("swipeleft", nextSlide);
+
+		Hammer(el).off("swiperight", previousSlide);
+
 	}
 
 	function hideAnnotationView() {
@@ -315,6 +316,10 @@ $(function() {
 		mode='slideshow';
 		$('#canvas').hide();
 		hideColorPicker();
+		var el = document.getElementById('slide_container');
+	  	Hammer(el).on("swipeleft", nextSlide);
+
+		Hammer(el).on("swiperight", previousSlide);
 	}
 
 	//Pen
