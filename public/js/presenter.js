@@ -10,6 +10,7 @@ $(function() {
 	var currentHilightedPreview = 1;
 	var _handle = false;
 	var color = '#ff0000';
+	var pauseScreen = 'blackscreen'; //the string can only be 'whitescreen' or 'blackscreen'
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
 	var loadedIntoGridView = false;
 
@@ -25,14 +26,16 @@ $(function() {
 		}
 		if (!_handle){
 			$('#play_pause').css("background-image", "url(../icons/pause.png)"); 
-			$("#play_pause").data("mode", "pause")
+			$("#play_pause").data("mode", "pause");
 			startTimer();
+			socket.emit('issueCommand', { channel: channel, command: pauseScreen, showOrHide: false });
 		}
 		else
 		{	
 			stopTimer();
 			$('#play_pause').css("background-image", "url(../icons/play.png)"); 
-			$("#play_pause").data("mode", "play")
+			$("#play_pause").data("mode", "play");
+			socket.emit('issueCommand', { channel: channel, command: pauseScreen, showOrHide: true });
 		}
 	});
 
@@ -317,7 +320,7 @@ $(function() {
 	function hideAnnotationView() {
 		$('#annotation_panel').css({"display" : "none"});
 		$('#button_panel').css({"display" : "block"});
-		clearCanvas();
+		//clearCanvas();
 		mode='slideshow';
 		$('#canvas').hide();
 		hideColorPicker();
