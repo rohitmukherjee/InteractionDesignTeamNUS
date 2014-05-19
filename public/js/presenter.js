@@ -65,6 +65,7 @@ $(function() {
 	annotationButton.click(showAnnotationView);
 	annotationBack.click(hideAnnotationView);
 
+
 	console.log("Binding touch events to annotation button");
 	Hammer(annotationButton).on("tap", function(event) {
 		showAnnotationView();
@@ -326,6 +327,7 @@ $(function() {
 		Hammer(el).on("swiperight", previousSlide);
 	}
 
+
 	//Pen
 	$('#annotation-pen').touch(function(){
 		if (mode != 'pen') {
@@ -447,6 +449,11 @@ $(function() {
 			socket.emit('issueCommand', { channel: channel, command: 'drawHighlight', x1: x1, x2: x2, y1: y1, y2: y2 });
 		}
 	}
+
+	function sendColorToRemote() {
+		console.log("send color to remote");
+		socket.emit('issueCommand', { channel: channel, command: 'changeColor', color:color });
+	}
 	function updateCanvas() {
 		// resize canvas
 		var $slide = $('#slide_container'),
@@ -495,6 +502,7 @@ $(function() {
 				$('#color-green').css({"border": "1px solid red"});
 			break;
 		}
+		sendColorToRemote();
 	}
 	function highlightIcon(i) {
 		$('#annotation-pen').css({"border":"0"});

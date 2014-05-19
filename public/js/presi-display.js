@@ -13,7 +13,7 @@ $(function() {
 		$('#display').show();
 		socket.emit('join channel', channel);
 	});
-
+	var color;
 /*----------*/
 /* commands */
 /*----------*/
@@ -42,7 +42,7 @@ $(function() {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.beginPath();
 				ctx.arc(data.x, data.y, 10, 0, Math.PI*2, true);
-				ctx.fillStyle = '#ff0000';
+				ctx.fillStyle = color;
 				ctx.fill();
 				break;
 			case 'drawPen':
@@ -53,7 +53,7 @@ $(function() {
 				ctx.lineTo(data.x2, data.y2);
 				ctx.lineCap = 'round';
 				ctx.lineWidth = 5;
-				ctx.strokeStyle = '#ff0000';
+				ctx.strokeStyle = color;
 				ctx.stroke();
 				break;
 			case 'drawHighlight':
@@ -64,7 +64,7 @@ $(function() {
 				ctx.lineTo(data.x2, data.y2);
 				ctx.lineCap = 'square';
 				ctx.lineWidth = 20;
-				ctx.strokeStyle = '#ffff00';
+				ctx.strokeStyle = color;
 				ctx.stroke();
 				break;
 			case 'clearCanvas':
@@ -74,6 +74,9 @@ $(function() {
 			case 'canvas':
 				console.log('Canvas: ' + data.width + 'x' + data.height);
 				$('canvas').attr({ width: data.width, height: data.height });
+				break;
+			case 'changeColor':
+				color = data.color;
 				break;
 			default:
 				console.warn('Unexpected data: ' + data);
