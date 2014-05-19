@@ -13,6 +13,9 @@ $(function() {
 	var pauseScreen = 'blackscreen'; //the string can only be 'whitescreen' or 'blackscreen'
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
 	var loadedIntoGridView = false;
+	var canvasData = {};
+
+	$('#canvas').show();
 
 	// Plays/Pauses slide show and timer on click. Used for starting the show as well
 	var playPauseButton = document.getElementById('play_pause');
@@ -64,10 +67,13 @@ $(function() {
 	var yellowButton = document.getElementById('color-yellow');
 	var greenButton = document.getElementById('color-green');
 	var blueButton = document.getElementById('color-blue');
+    var annotationPen = document.getElementById('annotation-pen');
+    var annotationHighlight = document.getElementById('annotation-highlight');
+    var annotationLaser = document.getElementById('annotation-laser');
 
-	annotationButton.click(showAnnotationView);
-	annotationBack.click(hideAnnotationView);
-
+	var penHammertime = Hammer(annotationPen);
+	var highlightHammertime = Hammer(annotationHighlight);
+	var laserHammertime = Hammer(annotationLaser);
 
 	console.log("Binding touch events to annotation button");
 	Hammer(annotationButton).on("tap", function(event) {
@@ -78,6 +84,7 @@ $(function() {
 	Hammer(annotationBack).on("tap", function(event) {
 		hideAnnotationView();
 	});
+
 
 	Hammer(redButton).on("tap", function(event) {
 		pickColor('r');
@@ -91,6 +98,8 @@ $(function() {
 	Hammer(blueButton).on("tap", function(event) {
 		pickColor('b');
 	});
+
+
 	/* Handlers for showing and hiding the settings view */
 
 	var settingsButton = document.getElementById('settings_button'); 
@@ -180,6 +189,8 @@ $(function() {
 
 	function slideTouchEvent() {
 		var $this = $(this);
+		saveCanvas();
+		clearCanvas();
 		var slide = $this.index() + 1;
 		updateSlide($this.attr('src'));
 		currentSlide = slide;
@@ -228,6 +239,7 @@ $(function() {
 		updateSlideStatus(currentSlide);
 		updateNotes();
 		updateScrollPreview();
+		
 		if (typeof hideEffect === 'undefined') hideEffect = 'fade';
 		if (typeof showEffect === 'undefined') showEffect = 'fade';
 		$('#slide_container').hide(hideEffect, hideEffectOptions, function() {
@@ -235,9 +247,10 @@ $(function() {
 			$('#slide_container').show(showEffect, showEffectOptions);
 		});
 			if (slideshow) { // only update display if slideshow is running
-				socket.emit('issueCommand', { channel: channel, command: 'slide', url: url });
+				socket.emit('issueCommand', { channel: channel, command: 'slide', url: url ,currentSlide:currentSlide});
 			}
-		}
+		reloadCanvas();
+	}
 
 
 	function updateNotes() {
@@ -312,88 +325,30 @@ $(function() {
 		$('#button_panel').css({"display" : "none"});
 		var el = document.getElementById('slide_container');
 	  	Hammer(el).off("swipeleft", nextSlide);
-
 		Hammer(el).off("swiperight", previousSlide);
+		penHammertime.on("tap", penHandler);
+		highlightHammertime.on("tap", highlightHandler);
+		laserHammertime.on("tap", laserHandler);
+		updateCanvas();
 
 	}
 
 	function hideAnnotationView() {
 		$('#annotation_panel').css({"display" : "none"});
 		$('#button_panel').css({"display" : "block"});
+		saveCanvas();
 		//clearCanvas();
 		mode='slideshow';
-		$('#canvas').hide();
 		hideColorPicker();
 		var el = document.getElementById('slide_container');
 	  	Hammer(el).on("swipeleft", nextSlide);
-
 		Hammer(el).on("swiperight", previousSlide);
+		$('canvas').touchable({
+			touchDown: function() { return false; }, // do nothing
+			touchMove: function() { return false; }, //do nothing
+			touchUp: function() { return false; }, // do nothing
+		});
 	}
-
-
-	//Pen
-	$('#annotation-pen').touch(function(){
-		if (mode != 'pen') {
-			mode = 'pen';
-			showColorPicker();
-			pickColor('r');
-			highlightIcon($('#annotation-pen'));
-			$('canvas').touchable({
-				touchDown: function() { return false; }, // do nothing
-				touchMove: drawPen,
-				touchUp: function() { return false; }, // do nothing
-			}).show();
-		} else {
-			mode = 'slideshow';
-			$('#canvas').hide();
-			clearCanvas();
-			hideColorPicker();
-		}
-		updateCanvas();
-	});
-
-	// highlight
-	$('#annotation-highlight').touch(function(){
-		if (mode != 'highlight') {
-			mode = 'highlight';
-			showColorPicker();
-			pickColor('y');
-			highlightIcon($('#annotation-highlight'));
-			$('canvas').touchable({
-				touchDown: function() { return false; }, // do nothing
-				touchMove: drawHighlight,
-				touchUp: function() { return false; }, // do nothing
-			}).show();
-		} else {
-			mode = 'slideshow';
-			$('canvas').hide();
-			clearCanvas();
-			hideColorPicker();
-		}
-		updateCanvas();
-	});
-
-	//laser
-	$('#annotation-laser').touch(function(){
-		if (mode != 'laser') {
-			mode = 'laser';
-			showColorPicker();
-			pickColor('r');
-			updateCanvas();
-			highlightIcon($('#annotation-laser'));
-			$('canvas').touchable({
-				touchDown: drawLaser,
-				touchMove: drawLaser,
-				touchUp: clearCanvas,
-			}).show();
-		} else {
-			mode = 'slideshow';
-			$('canvas').hide();
-			clearCanvas();
-			hideColorPicker();
-		}
-		updateCanvas();
-	});
 
 	function drawLaser(e) {
 		var ctx = this.getContext('2d'),
@@ -453,6 +408,64 @@ $(function() {
 		}
 	}
 
+	function penHandler(event) {
+		if (mode != 'pen') {
+			mode = 'pen';
+			showColorPicker();
+			pickColor('r');
+			highlightIcon($('#annotation-pen'));
+			$('canvas').touchable({
+				touchDown: function() { return false; }, // do nothing
+				touchMove: drawPen,
+				touchUp: function() { return false; }, // do nothing
+			}).show();
+		} else {
+			mode = 'slideshow';
+			clearCanvas();
+			hideColorPicker();
+		}
+		//updateCanvas();
+	}
+
+	function highlightHandler(event) {
+		if (mode != 'highlight') {
+			mode = 'highlight';
+			showColorPicker();
+			pickColor('y');
+			highlightIcon($('#annotation-highlight'));
+			$('canvas').touchable({
+				touchDown: function() { return false; }, // do nothing
+				touchMove: drawHighlight,
+				touchUp: function() { return false; }, // do nothing
+			}).show();
+		} else {
+			mode = 'slideshow';
+			clearCanvas();
+			hideColorPicker();
+		}
+		//updateCanvas();
+	}
+
+	function laserHandler(event) {
+		if (mode != 'laser') {
+			mode = 'laser';
+			showColorPicker();
+			pickColor('r');
+			//updateCanvas();
+			highlightIcon($('#annotation-laser'));
+			$('canvas').touchable({
+				touchDown: drawLaser,
+				touchMove: drawLaser,
+				touchUp: clearCanvas,
+			}).show();
+		} else {
+			mode = 'slideshow';
+			clearCanvas();
+			hideColorPicker();
+		}
+		//updateCanvas();
+	}
+
 	function sendColorToRemote() {
 		console.log("send color to remote");
 		socket.emit('issueCommand', { channel: channel, command: 'changeColor', color:color });
@@ -472,6 +485,29 @@ $(function() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		if (slideshow) { // only update display if slideshow is running
 			socket.emit('issueCommand', { channel: channel, command: 'clearCanvas' });
+		}
+	}
+
+	function eraseCanvas(){
+		clearCanvas();
+		delete canvasData[currentSlide];
+		socket.emit('issueCommand', { channel: channel, command: 'eraseCanvas' });
+	}
+
+	function saveCanvas() {
+		var ctx = canvas.getContext('2d');
+		canvasData[currentSlide] = ctx.getImageData(0, 0,canvas.width,canvas.height);
+		socket.emit('issueCommand', { channel: channel, command: 'saveCanvas' });
+	}
+
+	function reloadCanvas() {
+		if (canvasData[currentSlide]) {
+			var ctx = canvas.getContext('2d');
+			ctx.putImageData(canvasData[currentSlide], 0, 0);
+			socket.emit('issueCommand', { channel: channel, command: 'reloadCanvas'});
+		}
+		else {
+			clearCanvas();
 		}
 	}
 

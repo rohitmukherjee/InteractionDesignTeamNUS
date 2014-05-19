@@ -156,7 +156,6 @@ a {
 	overflow: hidden;
 }
 canvas {
-	border: 1px solid red;
 	opacity: 0.8;
 	display: none;
 	position: absolute;

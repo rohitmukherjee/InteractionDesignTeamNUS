@@ -144,6 +144,13 @@ body {
 	overflow: hidden;
 }
 
+#canvas {
+	opacity: 0.8;
+	display: none;
+	height: 98%;
+	margin: 2px;
+	padding: 2px;
+}
 #notes_container {
 	display: none;
 	height: 35%;

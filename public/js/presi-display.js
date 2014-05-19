@@ -14,6 +14,7 @@ $(function() {
 		socket.emit('join channel', channel);
 	});
 	var color;
+	var canvasData = {};
 /*----------*/
 /* commands */
 /*----------*/
@@ -27,6 +28,7 @@ $(function() {
 			case 'slide':
 				console.log('Update slide: ' + data.url);
 				$('#slide').css('background-image', 'url(' + data.url + ')').show();
+				slide = data.currentSlide;
 				break;
 			case 'blackscreen':
 				console.log('Toggle blackscreen: ' + data.showOrHide);
@@ -78,6 +80,19 @@ $(function() {
 			case 'changeColor':
 				color = data.color;
 				break;
+			case 'saveCanvas':
+				var ctx = canvas.getContext('2d');
+				canvasData[slide] = ctx.getImageData(0, 0,canvas.width,canvas.height);
+
+				break;
+			case 'reloadCanvas':
+				var ctx = canvas.getContext('2d');
+				ctx.putImageData(canvasData[slide], 0, 0);
+				break;
+			case 'eraseCanvas':
+				var ctx = canvas.getContext('2d');
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				delete canvasData[currentSlide];
 			default:
 				console.warn('Unexpected data: ' + data);
 				break;
