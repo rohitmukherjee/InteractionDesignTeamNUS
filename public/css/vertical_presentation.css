@@ -30,7 +30,7 @@ body {
 	position:absolute;
 	height: 86px;
 	width: 600px;
-	top:0;
+	top:86px;
 	left: 0;
 	z-index: 100;
 }

@@ -199,13 +199,15 @@ canvas {
 #preview li {
 	display: block;
 	padding: 0;
-	margin: 1%;
+	margin: 0;
 }
 
 #preview ul img {	
 	border: 1px solid black;
-	height: 65px;
+	height: 90px;
+	width: 120px;
 	margin: 1px;
+	margin-left: 7px;
 }
 
 /* Styles for the hideable grid - view go here */

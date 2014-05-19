@@ -166,7 +166,7 @@ $(function() {
 	function loadSlidePreview() {
 		for (var i = 1; i <= slideCount; i++) {	
 			// set the width of list - container
-			$('#list-container').css({'width' : slideCount * 120 + 'px'});
+			$('#list-container').css({'width' : slideCount * 124 + 'px'});
 			$('#list').append('<li id=' + i + ' >');
 			$("<img></img>", { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
 			$("#list #" + i).append('</li>');
@@ -524,7 +524,7 @@ $(function() {
 		var divId = $("#preview");
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview vertically " + divId.scrollTop());
-		divId.scrollTop(scrollAmount * 65);
+		divId.scrollTop((scrollAmount - 3) * 92);
 		updateHighlightedPreview();
 
 	}
@@ -533,7 +533,7 @@ $(function() {
 		var divId = $("#preview");
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview horizontally " + divId.scrollLeft());
-		divId.scrollLeft(scrollAmount * 65 * 0.4);
+		divId.scrollLeft((scrollAmount - 3) * 122);
 		updateHighlightedPreview();
 	}
 
