@@ -7,6 +7,7 @@ $(function() {
 	var slideshow = false;
 	var mode = 'slideshow';	
 	var currentSlide = 1;
+	var currentHilightedPreview = 1;
 	var _handle = false;
 	var color = '#ff0000';
 	// This flag is set to true whenever the user FIRST goes into grid view, It prevents reloading images unnecessarily
@@ -515,6 +516,8 @@ $(function() {
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview vertically " + divId.scrollTop());
 		divId.scrollTop(scrollAmount * 65);
+		updateHighlightedPreview();
+
 	}
 
 	function updateScrollPreviewVertical() {
@@ -522,6 +525,13 @@ $(function() {
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview horizontally " + divId.scrollLeft());
 		divId.scrollLeft(scrollAmount * 65 * 0.4);
+		updateHighlightedPreview();
+	}
+
+	function updateHighlightedPreview() {
+		$("#" + currentHilightedPreview).css({"border": "0"});
+		$("#" + currentSlide).css({"border": "2px solid red"});
+		currentHilightedPreview = currentSlide;
 	}
 
 	/* Orientation specific helper functions */
