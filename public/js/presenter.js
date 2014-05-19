@@ -166,7 +166,7 @@ $(function() {
 	function loadSlidePreview() {
 		for (var i = 1; i <= slideCount; i++) {	
 			// set the width of list - container
-			$('#list-container').css({'width' : slideCount * 65 + 'px'});
+			$('#list-container').css({'width' : slideCount * 120 + 'px'});
 			$('#list').append('<li id=' + i + ' >');
 			$("<img></img>", { src: 'slides/Slide' + i + '.PNG' }).appendTo("#" + i);
 			$("#list #" + i).append('</li>');
@@ -189,7 +189,8 @@ $(function() {
 	function stopTimer() {
 		clearInterval(_handle);
 		_handle = false;
-		$('#timer').css({"border": "0px"});
+		$('#timer').css({"border": "1px solid black"});
+		$('#timer').css({"border-radius": "10px"});
 	}
 
 	function startTimer() {
