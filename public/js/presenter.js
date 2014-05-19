@@ -189,6 +189,7 @@ $(function() {
 	function stopTimer() {
 		clearInterval(_handle);
 		_handle = false;
+		$('#timer').css({"border": "0px"});
 	}
 
 	function startTimer() {
@@ -196,6 +197,8 @@ $(function() {
 			timer++;
 			$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
 		}, 1000);
+		$('#timer').css({"border": "2px solid red"});
+
 	}
 
 	function nextSlide() {
