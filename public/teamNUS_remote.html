@@ -91,7 +91,7 @@
 		</div>
 		<div id="slide-container-slider">
 			<label for="slide-size">Slide Container Size</label>
-			<input type=range min=0 max=100 value=100 step="5" id='slide-size' onchange="outputUpdate(value)">
+			<input type=range min=0 max=100 value=100 step="5" id='slide-size' oninput="outputUpdate(value)">
 			<output for="slide-size" id="slide-size-slider">100</output>
 		</div>
 		<div id="reset-timer">
@@ -103,6 +103,7 @@
 	<script>
 	function outputUpdate(sliderValue) {
 	document.querySelector('#slide-size-slider').value = sliderValue;
+	console.log("slider value ist " + sliderValue);
 	}
 
 </script>

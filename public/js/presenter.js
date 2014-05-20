@@ -175,7 +175,7 @@ $(function() {
 
 	//$.touch.preventDefault = true; // disable default behaviour
 
-	$.touch.triggerMouseEvents = true; // enable mouse events
+	//$.touch.triggerMouseEvents = true; // enable mouse events
 
 	// connect to Presi
 	var socket = io.connect('http://' + window.location.host),
@@ -229,6 +229,7 @@ $(function() {
 	function resetTimer() {
 		timer = 0;
 		$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
+		alert("Timer has been reset!");
 	}
 
 	function nextSlide() {
@@ -327,6 +328,7 @@ $(function() {
 
 	function setNewSlideContainerSize() {
 		var sliderValue = $("#slide-size-slider").html();
+		console.log("slidervalue is " + sliderValue);
 		$("#slide_container").css('height', sliderValue + '%');
 		$("#slide_container").css('background-size', sliderValue + '%');
 		$("#notes_container").css('height', (100 - sliderValue) + '%');
