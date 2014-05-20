@@ -59,6 +59,15 @@ $(function() {
 	Hammer(gridBack).on("tap", function(event) {
 	hideGridView();
 	});
+
+	/* Reset Timer event binding */
+	var resetTimerButton = document.getElementById('reset-timer-button')
+	resetTimerButton.click(resetTimer);
+	
+	Hammer(resetTimerButton).on("tap", function(event) {
+		resetTimer();
+	});
+
 	
 	/* Handlers for showing and hiding annotation view */
 	var annotationButton = document.getElementById('annotation_button');
@@ -215,6 +224,11 @@ $(function() {
 		}, 1000);
 		$('#timer').css({"border": "2px solid red"});
 
+	}
+
+	function resetTimer() {
+		timer = 0;
+		$('#timer').text(Math.floor(timer / 60) + ':' + ((timer % 60) < 10 ? '0' : '') + (timer % 60));
 	}
 
 	function nextSlide() {

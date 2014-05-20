@@ -274,7 +274,7 @@ label {
 
 #slide-size {
 	width: 400px;
-	height: 17px;
+	height: 25px;
 	position: relative;
 	margin-left: 20%;
 	margin-top: 5%;
@@ -462,4 +462,22 @@ input[type="range"]::-webkit-slider-thumb {
 	width:15;
 	background-color: blue;
 	border: 2px solid black;
+}
+
+
+#reset-timer {
+	margin-top: 50px;
+	position: absolute;
+	margin-left: 175px;
+}
+
+#reset-timer-button {
+	display: block;
+	background-image:url('../icons/timer.png');
+	margin-top: 40px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	height: 80px;
+	width: 75px;
 }
