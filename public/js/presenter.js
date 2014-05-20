@@ -2,7 +2,7 @@ $(function() {
 
 	/** Declare state variables and constants here*/
 
-	var slideCount = 26;
+	var slideCount = 15;
 	var timer = 0;
 	var slideshow = false;
 	var mode = 'slideshow';	
