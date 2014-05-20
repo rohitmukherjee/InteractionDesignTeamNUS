@@ -131,6 +131,7 @@ body {
 	height: 520px;
 	width: 100%;
 	background: url('../images/slide_container_background.png');
+	margin-bottom: 1px;
 }
 
 #slide_container {
@@ -151,11 +152,13 @@ body {
 	margin: 2px;
 	padding: 2px;
 }
+
 #notes_container {
 	display: none;
 	height: 35%;
 	background-color: grey;
 	margin: 2px;
+	border-top: 1px solid black;
 }
 
 #preview {
