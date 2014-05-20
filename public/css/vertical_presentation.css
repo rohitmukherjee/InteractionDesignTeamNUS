@@ -154,7 +154,7 @@ body {
 }
 
 #notes_container {
-	display: none;
+	display: block;
 	height: 35%;
 	background-color: grey;
 	margin: 2px;
