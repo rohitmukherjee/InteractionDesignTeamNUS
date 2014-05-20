@@ -140,37 +140,37 @@ $(function() {
 	// configure jQMultiTouch
 	// Hide the button panel on application start - up
 	
-	if (window.orientation === 0) {
-		console.log("Initial orientation is portrait!!");
-		$('#button_panel').hide();
-		var el = document.getElementById('slide_container');
-		Hammer(el).on("tap", toggleButtonPanel);
-	} else {
-		console.log("Initial orientation is landscape!!");
-		$('#button_panel').show();
-	}
+	// if (window.orientation === 0) {
+	// 	console.log("Initial orientation is portrait!!");
+	// 	$('#button_panel').hide();
+	// 	var el = document.getElementById('slide_container');
+	// 	Hammer(el).on("tap", toggleButtonPanel);
+	// } else {
+	// 	console.log("Initial orientation is landscape!!");
+	// 	$('#button_panel').show();
+	// }
 
-	$(window).on("orientationchange",function(){
+	// $(window).on("orientationchange",function(){
 		
-	  	if(window.orientation === 0) // Portrait
-	  	{
-	  		console.log("orientation changes to portrait!!");
-		    $('#button_panel').hide();
-			var el = document.getElementById('slide_container');
-			Hammer(el).on("tap", toggleButtonPanel);
-	  	}
-		else // Landscape
-		{
-			$("#preview").scrollLeft(0);
-			console.log("orientation changes to landscape!!");
-	    	var annotation_state = $("#annotation_panel").css("display");
-	    	if (annotation_state === "none")
-	    	$('#button_panel').show();
-			var el = document.getElementById('slide_container');
-			Hammer(el).off('tap', toggleButtonPanel);
-			Hammer(el).destroy();
-	  	}
-	});
+	//   	if(window.orientation === 0) // Portrait
+	//   	{
+	//   		console.log("orientation changes to portrait!!");
+	// 	    $('#button_panel').hide();
+	// 		var el = document.getElementById('slide_container');
+	// 		Hammer(el).on("tap", toggleButtonPanel);
+	//   	}
+	// 	else // Landscape
+	// 	{
+	// 		$("#preview").scrollLeft(0);
+	// 		console.log("orientation changes to landscape!!");
+	//     	var annotation_state = $("#annotation_panel").css("display");
+	//     	if (annotation_state === "none")
+	//     	$('#button_panel').show();
+	// 		var el = document.getElementById('slide_container');
+	// 		Hammer(el).off('tap', toggleButtonPanel);
+	// 		Hammer(el).destroy();
+	//   	}
+	// });
 	$(document).ready(loadSlidePreview);
 
 	//$.touch.preventDefault = true; // disable default behaviour
@@ -585,7 +585,7 @@ $(function() {
 		var divId = $("#preview");
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview vertically " + divId.scrollTop());
-		divId.scrollTop((scrollAmount - 3) * 92);
+		divId.scrollTop((scrollAmount - 3) * 94);
 		updateHighlightedPreview();
 
 	}
@@ -594,7 +594,7 @@ $(function() {
 		var divId = $("#preview");
 		var scrollAmount = currentSlide;
 		console.log("Autoscrolling preview horizontally " + divId.scrollLeft());
-		divId.scrollLeft((scrollAmount - 3) * 122);
+		divId.scrollLeft((scrollAmount - 3) * 124);
 		updateHighlightedPreview();
 	}
 
