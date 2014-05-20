@@ -73,7 +73,7 @@ a {
 	background-color: #555550;
 	vertical-align: center;
 	font-size: 1.2em;
-
+	color: white;
 	padding: 5%;
 	height: 50%;
 }
@@ -83,6 +83,7 @@ a {
 	text-align: center;
 	background-color: #555550;
 	background-size: 100%;
+	color: white;
 	vertical-align: center;
 	font-size: 1.2em;
 	padding: 5%;
