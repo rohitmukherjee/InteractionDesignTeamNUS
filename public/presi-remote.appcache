@@ -1,0 +1,49 @@
+CACHE MANIFEST
+
+#cache Presi Remote core
+/teamNUS_remote.html
+/presi_remote.png
+/css/jquery.multitouch.css
+/css/horizontal_presentation.css
+/css/vertical_presentation.css
+/js/presenter.js
+
+#cache Node.js Socket IO
+/socket.io/socket.io.js
+
+#cache jQuery
+http://code.jquery.com/jquery.js
+http://code.jquery.com/ui/1.10.4/jquery-ui.js
+
+#cache HammerJS
+/js/hammer.min.js
+
+#cache jQMultiTouch
+/js/jquery.multitouch.js
+/js/jquery.multitouch-draggable.js
+/js/jquery.multitouch-gestures.js
+/js/jquery.multitouch-orientable.js
+/js/jquery.multitouch-resizable.js
+/js/jquery.multitouch-rotatable.js
+/js/jquery.multitouch-scalable.js
+
+#cache slides
+/slides/Slide1.png
+/slides/Slide2.png
+/slides/Slide3.png
+/slides/Slide4.png
+/slides/Slide5.png
+/slides/Slide6.png
+/slides/Slide7.png
+/slides/Slide8.png
+/slides/Slide9.png
+/slides/Slide10.png
+/slides/Slide11.png
+/slides/Slide12.png
+/slides/Slide13.png
+/slides/Slide14.png
+/slides/Slide15.png
+
+NETWORK:
+#other resources require online access
+*
